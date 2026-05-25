@@ -34,12 +34,13 @@ export const site = {
   },
 
   // ─── Navigazione (Header + Footer) ───────────────────────────
+  // `href` può essere un anchor (#chi-siamo) o un path assoluto sotto il locale (/galleria).
   nav: [
-    { hash: '#chi-siamo', label: { it: 'Chi siamo', en: 'About' } },
-    { hash: '#servizi', label: { it: 'Servizi', en: 'Services' } },
-    { hash: '#galleria', label: { it: 'Galleria', en: 'Gallery' } },
-    { hash: '#faq', label: { it: 'FAQ', en: 'FAQ' } },
-    { hash: '#contatti', label: { it: 'Contatti', en: 'Contact' } },
+    { href: '#chi-siamo', label: { it: 'Chi siamo', en: 'About' } },
+    { href: '#servizi', label: { it: 'Servizi', en: 'Services' } },
+    { href: '/galleria', label: { it: 'Galleria', en: 'Gallery' } },
+    { href: '#faq', label: { it: 'FAQ', en: 'FAQ' } },
+    { href: '#contatti', label: { it: 'Contatti', en: 'Contact' } },
   ],
 
   // ─── Hero ────────────────────────────────────────────────────
@@ -110,15 +111,29 @@ export const site = {
   },
 
   // ─── Galleria ────────────────────────────────────────────────
+  // width/height: dimensioni dell'immagine (servono al masonry layout).
+  // caption: opzionale, appare nel lightbox.
+  // Le prime 5 vengono mostrate in homepage (bento). Tutte appaiono su /galleria (masonry).
   gallery: {
     title: { it: 'Galleria', en: 'Gallery' },
+    intro: {
+      it: 'Uno sguardo attraverso il nostro mondo, raccolto in immagini.',
+      en: 'A glimpse through our world, collected in images.',
+    },
+    viewAll: { it: 'Vedi tutta la galleria', en: 'View all photos' },
     images: [
-      { src: '/images/gallery1.svg', alt: 'gallery-1' },
-      { src: '/images/gallery2.svg', alt: 'gallery-2' },
-      { src: '/images/gallery3.svg', alt: 'gallery-3' },
-      { src: '/images/gallery4.svg', alt: 'gallery-4' },
-      { src: '/images/gallery5.svg', alt: 'gallery-5' },
-      { src: '/images/gallery6.svg', alt: 'gallery-6' },
+      { src: '/images/gallery1.svg',  alt: 'Vista 1',  width: 800,  height: 800,  caption: { it: 'Primavera nel cortile',        en: 'Spring in the courtyard' } },
+      { src: '/images/gallery2.svg',  alt: 'Vista 2',  width: 800,  height: 1200, caption: { it: 'Dettaglio della facciata',     en: 'Façade detail' } },
+      { src: '/images/gallery3.svg',  alt: 'Vista 3',  width: 1200, height: 800,  caption: { it: 'Vista panoramica al tramonto', en: 'Panoramic sunset view' } },
+      { src: '/images/gallery4.svg',  alt: 'Vista 4',  width: 800,  height: 1000, caption: { it: "L'angolo lettura",             en: 'The reading nook' } },
+      { src: '/images/gallery5.svg',  alt: 'Vista 5',  width: 1200, height: 900,  caption: { it: 'Il salone principale',          en: 'The main hall' } },
+      { src: '/images/gallery6.svg',  alt: 'Vista 6',  width: 800,  height: 800,  caption: { it: 'Particolare antico',            en: 'Antique detail' } },
+      { src: '/images/gallery7.svg',  alt: 'Vista 7',  width: 800,  height: 1100, caption: { it: 'Scala in legno',                en: 'Wooden staircase' } },
+      { src: '/images/gallery8.svg',  alt: 'Vista 8',  width: 1200, height: 800,  caption: { it: 'Cucina tradizionale',           en: 'Traditional kitchen' } },
+      { src: '/images/gallery9.svg',  alt: 'Vista 9',  width: 800,  height: 800,  caption: { it: 'Il giardino',                   en: 'The garden' } },
+      { src: '/images/gallery10.svg', alt: 'Vista 10', width: 800,  height: 1200, caption: { it: 'Lucernario al mattino',         en: 'Morning skylight' } },
+      { src: '/images/gallery11.svg', alt: 'Vista 11', width: 1200, height: 700,  caption: { it: 'Notturno',                       en: 'Nighttime' } },
+      { src: '/images/gallery12.svg', alt: 'Vista 12', width: 800,  height: 1050, caption: { it: "L'ingresso",                    en: 'The entrance' } },
     ],
   },
 

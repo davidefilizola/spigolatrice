@@ -25,8 +25,8 @@ export default function Footer({ locale }: FooterProps) {
           <nav className="flex flex-col gap-2">
             {site.nav.map((item) => (
               <Link
-                key={item.hash}
-                href={`/${locale}${item.hash}`}
+                key={item.href}
+                href={`/${locale}${item.href}`}
                 className="w-fit text-sm text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100 transition-colors"
               >
                 {t(item.label, locale)}

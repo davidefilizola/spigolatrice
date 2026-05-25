@@ -54,8 +54,8 @@ export default function Header({ locale }: HeaderProps) {
           <nav className="hidden md:flex items-center gap-8">
             {site.nav.map((item) => (
               <Link
-                key={item.hash}
-                href={`/${locale}${item.hash}`}
+                key={item.href}
+                href={`/${locale}${item.href}`}
                 className={`text-sm transition-colors duration-200 ${linkColor}`}
               >
                 {t(item.label, locale)}
@@ -102,8 +102,8 @@ export default function Header({ locale }: HeaderProps) {
           <div className="md:hidden border-t border-stone-200 bg-stone-50 dark:border-stone-800 dark:bg-stone-950 py-3">
             {site.nav.map((item) => (
               <Link
-                key={item.hash}
-                href={`/${locale}${item.hash}`}
+                key={item.href}
+                href={`/${locale}${item.href}`}
                 onClick={() => setMenuOpen(false)}
                 className="block py-2.5 text-sm text-stone-700 hover:text-stone-900 dark:text-stone-300 dark:hover:text-stone-100"
               >
