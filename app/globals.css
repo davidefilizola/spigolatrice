@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-fraunces);
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+html {
+  background-color: #faf8f5;
+  color: #1c1917;
+}
+
+html.dark {
+  background-color: #0c0a09;
+  color: #f5f0eb;
+}
+
+/* Selection */
+::selection {
+  background-color: #92400e;
+  color: #fff;
+}
+
+/* Mappa Leaflet — popup styling minimale */
+.leaflet-popup-content {
+  margin: 12px 16px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+}
