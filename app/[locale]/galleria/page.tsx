@@ -15,8 +15,8 @@ export default function GalleriaPage() {
   return (
     <div className="pt-28 sm:pt-32 pb-20 sm:pb-28">
       <Container>
-        {/* Header pagina */}
-        <header className="mb-12 sm:mb-16 max-w-2xl">
+        {/* Header */}
+        <header className="mb-10 sm:mb-14 max-w-2xl">
           <div className="flex items-center gap-3 mb-4">
             <span className="block h-px w-10 bg-amber-700 dark:bg-amber-500" />
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-amber-700 dark:text-amber-500">
@@ -35,21 +35,32 @@ export default function GalleriaPage() {
         </header>
 
         {/*
-          Masonry via CSS columns
-          Mobile: 2 colonne
-          Tablet: 3 colonne
-          Desktop: 4 colonne
-          break-inside-avoid impedisce che una foto venga "spezzata" tra colonne
+          Airbnb-style module grid (mobile + desktop, stesso pattern):
+          - grid-cols-2 fisso
+          - grid-auto-rows fisso per row height consistente
+          - Ogni foto ha layout: full | half | tall
+            - full → col-span-2 (riga full-width)
+            - half → col-span-1 row-span-1 (default)
+            - tall → col-span-1 row-span-2 (portrait, accanto a 2 half stacked)
+          - grid-auto-flow: dense → riempie i buchi auto
         */}
-        <div className="columns-2 sm:columns-3 lg:columns-4 gap-3 sm:gap-4 [column-fill:_balance]">
-          {site.gallery.images.map((image, i) => (
-            <button
-              key={image.src}
-              onClick={() => setLightboxIndex(i)}
-              className="block w-full mb-3 sm:mb-4 break-inside-avoid overflow-hidden rounded-lg bg-stone-200 dark:bg-stone-800 cursor-zoom-in group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-600"
-              aria-label={`Apri ${image.alt}`}
-            >
-              <div className="relative" style={{ aspectRatio: `${image.width} / ${image.height}` }}>
+        <div
+          className="grid grid-cols-2 gap-2 sm:gap-3 [grid-auto-flow:dense] [grid-auto-rows:42vw] sm:[grid-auto-rows:25vw] md:[grid-auto-rows:20vw] lg:[grid-auto-rows:16vw]"
+          style={{ maxWidth: '64rem', margin: '0 auto' }}
+        >
+          {site.gallery.images.map((image, i) => {
+            const span = {
+              full: 'col-span-2',
+              half: '',
+              tall: 'row-span-2',
+            }[image.layout]
+            return (
+              <button
+                key={image.src}
+                onClick={() => setLightboxIndex(i)}
+                className={`relative overflow-hidden rounded-lg bg-stone-200 dark:bg-stone-800 cursor-zoom-in group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 ${span}`}
+                aria-label={`Apri ${image.alt}`}
+              >
                 <Image
                   src={image.src}
                   alt={image.alt}
@@ -58,9 +69,9 @@ export default function GalleriaPage() {
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 />
                 <span className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
-              </div>
-            </button>
-          ))}
+              </button>
+            )
+          })}
         </div>
       </Container>
 

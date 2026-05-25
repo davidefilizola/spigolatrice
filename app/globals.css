@@ -12,18 +12,18 @@
 }
 
 html {
-  background-color: #faf8f5;
-  color: #1c1917;
+  background-color: #fcf8f0;  /* cream warm */
+  color: #1c1410;             /* warm near-black */
 }
 
 html.dark {
-  background-color: #0c0a09;
-  color: #f5f0eb;
+  background-color: #0e0b08;  /* deep warm dark */
+  color: #f5ede0;
 }
 
 /* Selection */
 ::selection {
-  background-color: #92400e;
+  background-color: #9a3412;  /* terracotta */
   color: #fff;
 }
 

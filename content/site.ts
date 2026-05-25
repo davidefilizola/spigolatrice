@@ -54,7 +54,7 @@ export const site = {
       it: 'Un posto autentico dove scoprire qualcosa di unico. Vieni a trovarci e lasciati sorprendere.',
       en: 'An authentic place to discover something unique. Come visit us and let yourself be surprised.',
     },
-    image: '/images/hero.svg',
+    image: 'https://picsum.photos/seed/casa-hero/1920/1080',
     cta: { it: 'Scrivici ora', en: 'Get in touch' },
   },
 
@@ -62,7 +62,7 @@ export const site = {
   about: {
     eyebrow: { it: 'La nostra storia', en: 'Our story' },
     title: { it: 'Chi siamo e cosa facciamo', en: 'Who we are and what we do' },
-    image: '/images/about.svg',
+    image: 'https://picsum.photos/seed/casa-about/1200/900',
     body: [
       {
         it: "Siamo una piccola realtà nata dalla passione e dall'amore per quello che facciamo. Ogni giorno ci impegniamo per offrire il meglio a chi ci sceglie, con cura per ogni dettaglio.",
@@ -82,7 +82,7 @@ export const site = {
     items: [
       {
         icon: '🌿',
-        image: '/images/service1.svg',
+        image: 'https://picsum.photos/seed/casa-service1/800/600',
         title: { it: 'Primo Servizio', en: 'First Service' },
         description: {
           it: 'Una descrizione breve e chiara del primo servizio che offriamo. Cambia questo testo con quello che fa al caso tuo.',
@@ -91,7 +91,7 @@ export const site = {
       },
       {
         icon: '🏡',
-        image: '/images/service2.svg',
+        image: 'https://picsum.photos/seed/casa-service2/800/600',
         title: { it: 'Secondo Servizio', en: 'Second Service' },
         description: {
           it: 'Una descrizione breve e chiara del secondo servizio. Puoi aggiungere o rimuovere elementi liberamente.',
@@ -100,7 +100,7 @@ export const site = {
       },
       {
         icon: '✨',
-        image: '/images/service3.svg',
+        image: 'https://picsum.photos/seed/casa-service3/800/600',
         title: { it: 'Terzo Servizio', en: 'Third Service' },
         description: {
           it: 'Una descrizione breve e chiara del terzo servizio. Il design si adatta automaticamente al numero di elementi.',
@@ -122,18 +122,20 @@ export const site = {
     },
     viewAll: { it: 'Vedi tutta la galleria', en: 'View all photos' },
     images: [
-      { src: '/images/gallery1.svg',  alt: 'Vista 1',  width: 800,  height: 800,  caption: { it: 'Primavera nel cortile',        en: 'Spring in the courtyard' } },
-      { src: '/images/gallery2.svg',  alt: 'Vista 2',  width: 800,  height: 1200, caption: { it: 'Dettaglio della facciata',     en: 'Façade detail' } },
-      { src: '/images/gallery3.svg',  alt: 'Vista 3',  width: 1200, height: 800,  caption: { it: 'Vista panoramica al tramonto', en: 'Panoramic sunset view' } },
-      { src: '/images/gallery4.svg',  alt: 'Vista 4',  width: 800,  height: 1000, caption: { it: "L'angolo lettura",             en: 'The reading nook' } },
-      { src: '/images/gallery5.svg',  alt: 'Vista 5',  width: 1200, height: 900,  caption: { it: 'Il salone principale',          en: 'The main hall' } },
-      { src: '/images/gallery6.svg',  alt: 'Vista 6',  width: 800,  height: 800,  caption: { it: 'Particolare antico',            en: 'Antique detail' } },
-      { src: '/images/gallery7.svg',  alt: 'Vista 7',  width: 800,  height: 1100, caption: { it: 'Scala in legno',                en: 'Wooden staircase' } },
-      { src: '/images/gallery8.svg',  alt: 'Vista 8',  width: 1200, height: 800,  caption: { it: 'Cucina tradizionale',           en: 'Traditional kitchen' } },
-      { src: '/images/gallery9.svg',  alt: 'Vista 9',  width: 800,  height: 800,  caption: { it: 'Il giardino',                   en: 'The garden' } },
-      { src: '/images/gallery10.svg', alt: 'Vista 10', width: 800,  height: 1200, caption: { it: 'Lucernario al mattino',         en: 'Morning skylight' } },
-      { src: '/images/gallery11.svg', alt: 'Vista 11', width: 1200, height: 700,  caption: { it: 'Notturno',                       en: 'Nighttime' } },
-      { src: '/images/gallery12.svg', alt: 'Vista 12', width: 800,  height: 1050, caption: { it: "L'ingresso",                    en: 'The entrance' } },
+      // layout: 'full' (span 2 cols, landscape) | 'half' (1 col, square-ish) | 'tall' (1 col × 2 rows, portrait)
+      // Sequenza demo: pattern variato che mostra tutti i tipi di moduli Airbnb-style
+      { src: 'https://picsum.photos/seed/casa-g1/1600/900',  alt: 'Vista panoramica', width: 1600, height: 900,  layout: 'full', caption: { it: 'Vista panoramica al tramonto', en: 'Panoramic sunset view' } },
+      { src: 'https://picsum.photos/seed/casa-g2/800/800',   alt: 'Cortile',           width: 800,  height: 800,  layout: 'half', caption: { it: 'Primavera nel cortile',        en: 'Spring in the courtyard' } },
+      { src: 'https://picsum.photos/seed/casa-g3/800/800',   alt: 'Dettaglio antico',  width: 800,  height: 800,  layout: 'half', caption: { it: 'Particolare antico',           en: 'Antique detail' } },
+      { src: 'https://picsum.photos/seed/casa-g4/800/800',   alt: 'Salone',            width: 800,  height: 800,  layout: 'half', caption: { it: 'Il salone principale',         en: 'The main hall' } },
+      { src: 'https://picsum.photos/seed/casa-g5/800/1200',  alt: 'Facciata',          width: 800,  height: 1200, layout: 'tall', caption: { it: 'Dettaglio della facciata',     en: 'Façade detail' } },
+      { src: 'https://picsum.photos/seed/casa-g6/800/800',   alt: 'Cucina',            width: 800,  height: 800,  layout: 'half', caption: { it: 'Cucina tradizionale',          en: 'Traditional kitchen' } },
+      { src: 'https://picsum.photos/seed/casa-g7/1600/800',  alt: 'Notturno',          width: 1600, height: 800,  layout: 'full', caption: { it: 'Notturno',                      en: 'Nighttime' } },
+      { src: 'https://picsum.photos/seed/casa-g8/800/800',   alt: 'Giardino',          width: 800,  height: 800,  layout: 'half', caption: { it: 'Il giardino',                   en: 'The garden' } },
+      { src: 'https://picsum.photos/seed/casa-g9/800/800',   alt: 'Angolo lettura',    width: 800,  height: 800,  layout: 'half', caption: { it: "L'angolo lettura",             en: 'The reading nook' } },
+      { src: 'https://picsum.photos/seed/casa-g10/800/1200', alt: 'Lucernario',        width: 800,  height: 1200, layout: 'tall', caption: { it: 'Lucernario al mattino',         en: 'Morning skylight' } },
+      { src: 'https://picsum.photos/seed/casa-g11/800/800',  alt: 'Scala',             width: 800,  height: 800,  layout: 'half', caption: { it: 'Scala in legno',               en: 'Wooden staircase' } },
+      { src: 'https://picsum.photos/seed/casa-g12/800/800',  alt: 'Ingresso',          width: 800,  height: 800,  layout: 'half', caption: { it: "L'ingresso",                   en: 'The entrance' } },
     ],
   },
 

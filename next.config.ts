@@ -5,8 +5,13 @@ const nextConfig: NextConfig = {
   // Aggiungere qui l'IP del Mac quando si vuole testare su mobile. Solo per `next dev`.
   allowedDevOrigins: ['192.168.1.172'],
   images: {
-    // Permette ai placeholder SVG di funzionare con next/image.
-    // Rimuovi quando sostituisci con immagini reali (jpg/webp/png).
+    // picsum.photos: placeholder fotografici realistici per lo sviluppo.
+    // Rimuovi quando sostituisci con immagini reali nel proprio dominio.
+    remotePatterns: [
+      { protocol: 'https', hostname: 'picsum.photos' },
+      { protocol: 'https', hostname: 'fastly.picsum.photos' },
+    ],
+    // Permette ancora gli SVG locali (es. og-image, icone).
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
