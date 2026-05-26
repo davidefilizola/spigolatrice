@@ -1,23 +1,29 @@
-# Boilerplate — Siti informativi
+# Siti boilerplate — Tier 1
 
 Base riutilizzabile per piccoli siti informativi (B&B, attività locali, hobby, piccole aziende).
+Next.js 16 · TypeScript · Tailwind v4 · PWA installabile.
 
-**Stack**: Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · Framer Motion · Leaflet · next-themes
+> ⚙️ **Workflow previsto**: questo template è pensato per essere usato **tramite Claude Code**.
+> Le istruzioni operative per Claude stanno in [`CLAUDE.md`](./CLAUDE.md) e vengono caricate
+> automaticamente nel suo contesto quando apri Claude Code in questa cartella.
 
 ---
 
-## ✨ Cosa include
+## ✨ Features incluse
 
-- ✅ **i18n IT/EN** semplice (no librerie esterne)
-- ✅ **Dark mode** nativo con toggle
-- ✅ **Animazioni** scroll-reveal eleganti
-- ✅ **Mappa** OpenStreetMap (zero API key)
-- ✅ **SEO completo**: metadata, hreflang, sitemap.xml, robots.txt, JSON-LD LocalBusiness
-- ✅ **Mobile-first** responsive
-- ✅ **Tipografia** Geist (sans) + Fraunces (serif elegante)
-- ✅ **Contact form** con API route
-- ✅ **Lightbox** galleria
-- ✅ **Accessibilità**: focus-visible, aria-*, struttura semantica
+- 🌐 **i18n IT/EN** type-safe inline (no JSON, no librerie)
+- 🌓 **Dark mode** nativo (next-themes)
+- 🎬 **Hero Ken Burns** (animazione CSS, no video)
+- 🖼️ **Gallery Airbnb-style**:
+  - Home: swipe carousel mobile + bento 1+4 desktop
+  - `/galleria`: CSS Grid module-based (full/half/tall)
+  - Lightbox con frecce, swipe, keyboard nav, caption
+- 🗺️ **Mappa** OpenStreetMap (CartoDB Voyager tile, no API key)
+- 💬 **WhatsApp** link (numero derivato auto da `contact.phone`)
+- 📱 **PWA installabile** (icona su home telefono, fullscreen)
+- 🎨 **Tipografia Geist + Fraunces** (serif elegante per i titoli)
+- 🔍 **SEO completo**: metadata, hreflang, sitemap.xml, robots.txt, JSON-LD LocalBusiness
+- 📨 **Form contatti** + API route (console.log; pronto per Resend)
 
 ---
 
@@ -25,7 +31,23 @@ Base riutilizzabile per piccoli siti informativi (B&B, attività locali, hobby, 
 
 ```bash
 npm install
-npm run dev          # http://localhost:3000
+npm run dev                 # http://localhost:3000
+```
+
+Per testare su telefono nella stessa WiFi:
+
+```bash
+# Trova IP del Mac
+ipconfig getifaddr en0
+# Aggiungi in next.config.ts: allowedDevOrigins: ['192.168.x.x']
+npm run dev -- -H 0.0.0.0 -p 3000
+# Apri http://192.168.x.x:3000 sul telefono
+```
+
+Per testare l'**installazione PWA** sul telefono (serve build production):
+
+```bash
+npm run build && npm start -- -H 0.0.0.0 -p 3000
 ```
 
 ---
@@ -33,179 +55,99 @@ npm run dev          # http://localhost:3000
 ## 📁 Struttura
 
 ```
-boilerplate/
-├── app/
-│   ├── [locale]/         # /it, /en
-│   ├── api/contact/      # form handler
-│   ├── sitemap.ts        # SEO
-│   ├── robots.ts         # SEO
-│   ├── layout.tsx        # root (fonts + theme)
-│   └── globals.css
-├── core/
-│   ├── components/       # 11 componenti riutilizzabili
-│   └── lib/              # i18n.ts, metadata.ts
-├── templates/
-│   └── informative/      # Hero, About, Services
-├── content/
-│   └── site.ts           # ← UNICA FONTE DI VERITÀ
-├── public/images/        # placeholder SVG (da sostituire)
-└── middleware.ts         # redirect / → /it
+content/site.ts              ← ⭐ unica fonte di verità
+core/
+├── components/              ← componenti riutilizzabili
+└── lib/
+    ├── i18n.ts              ← t() helper bilingue
+    └── metadata.ts          ← SEO metadata builder
+templates/informative/       ← sezioni del template (Hero, About, Services)
+app/
+├── [locale]/                ← /it, /en
+│   ├── page.tsx             ← homepage
+│   └── galleria/page.tsx    ← gallery dedicata
+├── api/contact/route.ts     ← form handler
+├── manifest.ts              ← PWA
+├── sitemap.ts               ← SEO
+├── robots.ts                ← SEO
+├── layout.tsx
+└── globals.css
+public/
+├── icons/                   ← icone PWA (SVG sorgente + PNG generati)
+└── sw.js                    ← service worker
+scripts/
+└── generate-icons.mjs       ← rigenera icone da SVG
+middleware.ts                ← redirect / → /it
 ```
 
 ---
 
-## 🎯 Come creare un nuovo sito
+## 🎯 Come creare un sito nuovo
 
-### Step 1 — Copia il boilerplate
+### Workflow con Claude Code (consigliato)
 
-```bash
-cp -r boilerplate mio-nuovo-sito
-cd mio-nuovo-sito
-rm -rf node_modules .next
-npm install
-```
+1. Copia/clona la cartella in una nuova posizione:
+   ```bash
+   cp -R tier1 ../colombaia
+   cd ../colombaia
+   rm -rf node_modules .next .git
+   git init -b main
+   npm install
+   ```
 
-### Step 2 — Modifica `content/site.ts`
+2. Apri Claude Code nella nuova cartella. Il file `CLAUDE.md` viene caricato in automatico.
 
-È l'**unico file** da modificare per la maggior parte dei casi:
+3. Dai un brief tipo:
+   > *"Crea il sito per la colombaia di Mario Rossi. Indirizzo: Via Roma 10, Asti. Email: info@lacolombaia.it. Telefono: +39 333 1234567. Coordinate: 44.9, 8.2. Le foto sono in ./assets/. Brand: lettere LC, colore deep red."*
 
-```typescript
-export const site = {
-  name: 'La Mia Colombaia',
-  url: 'https://miacolombaia.it',
+4. Claude aggiorna `content/site.ts`, sostituisce icone, configura tutto.
 
-  contact: {
-    email: 'info@miacolombaia.it',
-    phone: '+39 333 1234567',
-    address: 'Via Roma 10, 00100 Roma',
-    coordinates: { lat: 41.9028, lng: 12.4964 },
-  },
+### Workflow manuale (se non vuoi Claude)
 
-  hero: {
-    title: {
-      it: 'La passione per i colombi',
-      en: 'A passion for pigeons',
-    },
-    subtitle: {
-      it: 'Una colombaia tradizionale immersa nel verde.',
-      en: 'A traditional pigeon loft in the countryside.',
-    },
-    // ...
-  },
+Modifica solo questi file:
 
-  // Aggiungere una FAQ:
-  faq: {
-    items: [
-      {
-        q: { it: 'Posso visitarvi?', en: 'Can I visit?' },
-        a: { it: 'Certo, contattaci.', en: 'Sure, contact us.' },
-      },
-      // ...
-    ],
-  },
-}
-```
+| File | Cosa cambiare |
+|---|---|
+| `content/site.ts` | Tutti i testi, dati, contatti, FAQ, gallery |
+| `public/icons/icon.svg` | Lettere monogramma + colori brand |
+| `public/images/` | Sostituire foto reali (o lasciare i picsum) |
+| `app/manifest.ts` | `theme_color` se cambi palette |
+| `app/globals.css` | `html { background-color }` se cambi palette |
 
-Tutti i testi sono **bilingui** con type-safety: TypeScript ti forza a fornire sia `it` che `en`.
+Poi: `node scripts/generate-icons.mjs` per rigenerare le icone PNG.
 
-### Step 3 — Sostituisci le immagini
+---
 
-In `public/images/` ci sono SVG placeholder. Sostituiscili con foto reali (`.jpg` / `.webp`) e aggiorna i path in `site.ts`:
+## 🌐 Deploy
 
-```typescript
-hero: { image: '/images/foto-vera.jpg', ... }
-```
-
-> ⚠️ Quando sostituisci le immagini, **rimuovi** `dangerouslyAllowSVG` da `next.config.ts`.
-
-### Step 4 — Deploy
+Pensato per **Vercel**:
 
 ```bash
-git init && git add . && git commit -m "init"
+git remote add origin <tuo-repo-github>
 git push origin main
+# Su vercel.com → import repo → deploy
 ```
 
-Su [Vercel](https://vercel.com) collega il repo: deploy automatico, zero configurazione.
+Zero configurazione extra: Vercel rileva Next.js automaticamente.
 
-### Step 5 — (Opzionale) Email reali dal form
-
-Il form attualmente fa `console.log`. Per inviare email vere:
-
-1. `npm install resend`
-2. Decommenta il codice in `app/api/contact/route.ts`
-3. Aggiungi `RESEND_API_KEY` in `.env.local` (e nelle env vars di Vercel)
+> ⚠️ Quando deployi in produzione: `next.config.ts` ha `dangerouslyAllowSVG: true` per i placeholder SVG.
+> **Rimuovilo** quando sostituisci tutti i placeholder con foto vere `.jpg/.webp`.
 
 ---
 
-## 🧩 Come funziona la riusabilità
-
-**Per il primo sito** (es. colombaia):
-- Modifichi solo `content/site.ts`
-- Sostituisci immagini in `public/images/`
-
-**Per il secondo sito** (es. ristorante):
-- Stesso processo. Stessa struttura.
-
-**Per un terzo sito che ha sezioni DIVERSE** (es. Airbnb):
-- Crei un nuovo template in `templates/accommodation/`
-- Lì dentro metti i componenti specifici (Rooms, Amenities, HouseRules...)
-- I componenti `core/` rimangono identici (Header, Footer, FAQ, Gallery, Contact, ...)
-- In `app/[locale]/page.tsx` assembli i pezzi del nuovo template
-
----
-
-## 🛠️ Personalizzazioni comuni
-
-### Aggiungere una lingua (es. francese)
-
-1. `core/lib/i18n.ts` → aggiungi `'fr'` a `locales`
-2. `content/site.ts` → aggiungi `fr: '...'` a tutti i campi i18n
-3. Il type-checking TypeScript ti aiuterà a non dimenticare nessun campo
-
-### Cambiare i colori del tema
-
-Il tema usa la palette **stone** (neutri caldi) + **amber** (accenti) di Tailwind.
-
-Per cambiare: cerca-e-sostituisci globale (es. `amber-700` → `emerald-700`).
-
-### Aggiungere una sezione nuova
-
-1. Crea il componente in `core/components/` (se riusabile) o `templates/informative/` (se specifico)
-2. Importalo in `app/[locale]/page.tsx`
-3. Aggiungi il link in `site.nav` (apparirà in Header e Footer)
-
-### Aggiungere/rimuovere servizi, FAQ, gallery
-
-Solo `content/site.ts`. Aggiungi/rimuovi oggetti dall'array corrispondente.
-
----
-
-## 📋 Scripts
+## 🛠️ Comandi utili
 
 ```bash
-npm run dev      # dev server
-npm run build    # build di produzione
-npm run start    # serve la build
+npm run dev                        # dev server
+npm run build                      # build production
+npm start                          # serve la build (necessario per testare PWA install)
+node scripts/generate-icons.mjs    # rigenera icone PWA da SVG
 ```
 
 ---
 
-## 🌐 Routing
+## 📚 Per Claude Code
 
-- `/` → redirect a `/it` (lingua default)
-- `/it` → versione italiana
-- `/en` → versione inglese
+Le istruzioni operative dettagliate (regole, convenzioni, cosa NON fare, pattern, workflow) sono in **[`CLAUDE.md`](./CLAUDE.md)**.
 
-Il middleware (`middleware.ts`) detecta `Accept-Language` per il primo redirect.
-
----
-
-## 📝 SEO
-
-Già pronto in produzione:
-- `metadataBase` impostato da `site.url`
-- `<title>`, `<meta description>`, OpenGraph
-- `hreflang` automatico per IT/EN
-- `sitemap.xml` auto-generato (a `/sitemap.xml`)
-- `robots.txt` auto-generato (a `/robots.txt`)
-- **JSON-LD LocalBusiness** per SEO locale (Google Business)
+Quel file viene caricato automaticamente nel contesto di Claude Code quando apri questo progetto. Se lavori tramite Claude, non ti serve leggerlo manualmente.
