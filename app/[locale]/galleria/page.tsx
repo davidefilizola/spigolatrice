@@ -44,21 +44,33 @@ export default function GalleriaPage() {
             - tall → col-span-1 row-span-2 (portrait, accanto a 2 half stacked)
           - grid-auto-flow: dense → riempie i buchi auto
         */}
+        {/*
+          Aspect ratio per item invece di grid-auto-rows fisso.
+          Su 2 colonne fisse:
+          - half  → aspect-square (1:1)
+          - tall  → aspect-[1/2] su 1 col, row-span-2 → matcha 2 half stacked
+          - full  → aspect-[16/9] su 2 cols (riga propria, non si allinea ai half)
+          Geometria:
+          - col_width = W
+          - half: W × W
+          - tall: W × 2W (= 2 half stacked + gap)
+          - full: 2W × 9/16·2W ≈ 1.125W di altezza (riga distinta)
+        */}
         <div
-          className="grid grid-cols-2 gap-2 sm:gap-3 [grid-auto-flow:dense] [grid-auto-rows:42vw] sm:[grid-auto-rows:25vw] md:[grid-auto-rows:20vw] lg:[grid-auto-rows:16vw]"
-          style={{ maxWidth: '64rem', margin: '0 auto' }}
+          className="grid grid-cols-2 gap-2 sm:gap-3 [grid-auto-flow:dense] mx-auto"
+          style={{ maxWidth: '52rem' }}
         >
           {site.gallery.images.map((image, i) => {
-            const span = {
-              full: 'col-span-2',
-              half: '',
-              tall: 'row-span-2',
+            const cls = {
+              full: 'col-span-2 aspect-[16/9]',
+              half: 'aspect-square',
+              tall: 'row-span-2 aspect-[1/2]',
             }[image.layout]
             return (
               <button
                 key={image.src}
                 onClick={() => setLightboxIndex(i)}
-                className={`relative overflow-hidden rounded-lg bg-stone-200 dark:bg-stone-800 cursor-zoom-in group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 ${span}`}
+                className={`relative overflow-hidden rounded-lg bg-stone-200 dark:bg-stone-800 cursor-zoom-in group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 ${cls}`}
                 aria-label={`Apri ${image.alt}`}
               >
                 <Image
@@ -66,7 +78,7 @@ export default function GalleriaPage() {
                   alt={image.alt}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 26vw"
                 />
                 <span className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
               </button>

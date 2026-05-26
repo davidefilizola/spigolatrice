@@ -14,18 +14,16 @@ export default function Hero({ locale }: HeroProps) {
     <div className="relative min-h-svh flex items-center overflow-hidden">
       {/* Background image (Ken Burns) + overlays */}
       <div className="absolute inset-0 bg-stone-900 overflow-hidden">
-        <div className="absolute inset-0 kenburns">
-          <Image
-            src={site.hero.image}
-            alt={site.name}
-            fill
-            priority
-            className="object-cover opacity-50"
-            sizes="100vw"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/60" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.4))]" />
+        <Image
+          src={site.hero.image}
+          alt={site.name}
+          fill
+          priority
+          className="object-cover opacity-65 kenburns"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/70" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.5))]" />
       </div>
 
       {/* Content */}
