@@ -192,16 +192,13 @@ function MobileMenu({
         {/* Nav items — large serif typography */}
         <nav className="flex-1 px-6 sm:px-8 py-8 overflow-y-auto">
           <ul className="space-y-1">
-            {site.nav.map((item, i) => (
+            {site.nav.map((item) => (
               <li key={item.href}>
                 <Link
                   href={`/${locale}${item.href}`}
                   onClick={onClose}
-                  className="group flex items-baseline gap-4 py-4 border-b border-stone-200/70 dark:border-stone-800/70 last:border-0"
+                  className="group block py-4 border-b border-stone-200/70 dark:border-stone-800/70 last:border-0"
                 >
-                  <span className="font-serif italic text-sm text-amber-700 dark:text-amber-500 tabular-nums opacity-70 w-6">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
                   <span className="font-serif text-3xl sm:text-4xl text-stone-900 dark:text-stone-100 group-hover:text-amber-700 dark:group-hover:text-amber-500 transition-colors">
                     {t(item.label, locale)}
                   </span>
