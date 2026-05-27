@@ -4,6 +4,24 @@ Questo file viene caricato in automatico nel contesto. Sono le **regole della ca
 
 ---
 
+## ⚠️ Stato di questo progetto
+
+Questa NON è più una copia vergine del boilerplate. È il sito vivo di **Spigolatrice di Lambrate** — tre affitti brevi a Milano (host Pamela Pinna).
+Repo: `github.com/davidefilizola/spigolatrice` · Dominio: `spigolatricedilambrate.com`.
+
+**Modifiche strutturali rispetto al template:**
+- `content/site.ts` ha un campo `properties[]` (3 case con rating, recensioni, amenities, gallery) al posto di `services`. Esiste anche `neighborhood` per la descrizione condivisa di Lambrate.
+- Componente `templates/informative/Properties.tsx` (sostituisce `Services.tsx`, che è stato eliminato).
+- Pagina dinamica `app/[locale]/case/[slug]/page.tsx` per ogni casa, con sotto-componente client `PropertyGallery.tsx`.
+- `app/[locale]/galleria/page.tsx` raggruppa le foto per appartamento.
+- Header e Footer usano il logo PNG (`/images/logo.png`), non testo serif.
+
+**Sorgenti del cliente fuori dal workspace:**
+Le foto originali (multi-MB) e `INFO AIRBNB.docx` stanno in `../Spigolatrice-source/`.
+NON spostarle dentro il workspace o il dev server manda in OOM il Mac (vedi sezione "Asset sorgente del cliente" più in basso e nel `CLAUDE.md` del boilerplate).
+
+---
+
 ## Cos'è questo progetto
 
 Boilerplate Next.js per piccoli **siti informativi locali** (B&B, hobby, attività, piccole aziende). Pensato per essere **copiato/incollato** per ogni nuovo sito e personalizzato cambiando praticamente solo `content/site.ts`.
@@ -97,6 +115,25 @@ Procedi così, **senza chiedere conferma per ogni step**:
 5. **NON committare automaticamente** — l'utente farà commit/push quando vorrà. (A meno che esplicitamente richiesto.)
 
 ---
+
+## Asset sorgente del cliente — REGOLA CRITICA (anti-OOM)
+
+Il dev server di Next.js + Turbopack mette un file watcher ricorsivo su tutto il workspace. Quando lo stesso workspace contiene **anche le foto e i documenti originali del cliente** (cartelle tipo `Assets/`, `FOTO X/`, PDF, .docx, video), succede questo:
+
+1. il watcher indicizza centinaia di MB di binari pesanti
+2. ogni `<Image>` in dev mode triggera `sharp` che decodifica le sorgenti in RAM
+3. se è attiva una preview MCP (Chromium headless) si aggiunge un altro carico
+4. il Mac entra in swap, Claude Code arriva a usare 50–100 GB di memoria, il PC si blocca
+
+**Regola: i materiali sorgente del cliente NON stanno mai dentro al workspace Next.js.**
+
+Quando l'utente fornisce foto, video o documenti del cliente:
+
+1. Crea una cartella fratello del progetto, es. `<NomeSito>-source/` (allo stesso livello di `<NomeSito>/`)
+2. Spostaci dentro tutto il materiale grezzo (foto originali multi-MB, .docx, PDF, .doc, video, ecc.)
+3. Dentro `public/images/...` finiscono SOLO le versioni già pronte per il web: max 1280px lato lungo, qualità 80, formato `01.jpg`, `02.jpg`...
+4. Aggiungi al `.gitignore` del progetto (per evitare che ritornino dentro per errore):
+
 
 ## Convenzioni di codice
 
