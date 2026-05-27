@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import Container from '@/core/components/Container'
 import WhatsAppButton from '@/core/components/WhatsAppButton'
@@ -15,9 +16,23 @@ export default function Footer({ locale }: FooterProps) {
         <div className="grid sm:grid-cols-3 gap-10">
           {/* Brand */}
           <div>
-            <p className="font-serif text-lg text-stone-900 dark:text-stone-100">{site.name}</p>
-            <p className="mt-2 text-sm text-stone-500 dark:text-stone-400 leading-relaxed">
+            <div className="flex items-center gap-3">
+              <span className="relative h-12 w-12 shrink-0">
+                <Image
+                  src="/images/logo.png"
+                  alt={site.name}
+                  fill
+                  sizes="48px"
+                  className="object-contain rounded-full"
+                />
+              </span>
+              <p className="font-serif text-lg text-stone-900 dark:text-stone-100 leading-tight">{site.name}</p>
+            </div>
+            <p className="mt-3 text-sm text-stone-500 dark:text-stone-400 leading-relaxed">
               {site.contact.address}
+            </p>
+            <p className="mt-1 text-xs text-stone-400 dark:text-stone-500">
+              {t(site.footer.host, locale)}
             </p>
           </div>
 

@@ -1,43 +1,53 @@
 /**
- * Unica fonte di verità del sito.
- * Per creare un nuovo sito basta modificare questo file.
- * Tutti i testi sono bilingui (it / en).
+ * Unica fonte di verità del sito Spigolatrice di Lambrate.
+ * Tre appartamenti in affitto breve a Milano, quartiere universitario Lambrate.
  */
 export const site = {
   // ─── Identità ────────────────────────────────────────────────
-  name: 'Casa Esempio',
-  url: 'https://casaesempio.it',
+  name: 'Spigolatrice di Lambrate',
+  shortName: 'Spigolatrice',
+  url: 'https://spigolatricedilambrate.com',
 
   // ─── Contatti ────────────────────────────────────────────────
   contact: {
-    email: 'info@casaesempio.it',
-    phone: '+39 000 000 0000',
-    address: 'Via Esempio 1, 00000 Città (XX)',
-    coordinates: { lat: 41.9028, lng: 12.4964 },
-    // Messaggio precompilato per WhatsApp. Il numero viene derivato da `phone`.
+    email: 'pamelapinna79@gmail.com',
+    phone: '+39 339 4467784',
+    address: 'Piazza Donegani, Milano',
+    coordinates: { lat: 45.4845, lng: 9.2392 },
     whatsappMessage: {
-      it: 'Ciao! Vorrei avere informazioni.',
-      en: 'Hi! I would like some information.',
+      it: 'Ciao Pamela! Ti scrivo dal sito spigolatricedilambrate.com, vorrei informazioni sugli appartamenti.',
+      en: "Hi Pamela! I'm writing from spigolatricedilambrate.com, I'd like info about the apartments.",
     },
   },
 
   // ─── Social ──────────────────────────────────────────────────
   social: {
-    instagram: 'https://instagram.com/',
-    facebook: 'https://facebook.com/',
+    instagram: '',
+    facebook: '',
+    airbnbHost: 'https://www.airbnb.it/users/show/556885153',
   },
 
   // ─── SEO ─────────────────────────────────────────────────────
   seo: {
-    keywords: ['parola chiave 1', 'parola chiave 2', 'parola chiave 3'],
-    ogImage: '/images/og-image.svg',
+    keywords: [
+      'affitti brevi milano',
+      'appartamenti milano lambrate',
+      'spigolatrice di lambrate',
+      'casa vacanze milano',
+      'milano quartiere universitario',
+      'milan short term rental',
+      'milan apartments lambrate',
+      'lambrate apartments',
+      'airbnb lambrate',
+      'milano politecnico alloggio',
+    ],
+    ogImage: '/images/logo-og.png',
   },
 
-  // ─── Navigazione (Header + Footer) ───────────────────────────
-  // `href` può essere un anchor (#chi-siamo) o un path assoluto sotto il locale (/galleria).
+  // ─── Navigazione ─────────────────────────────────────────────
   nav: [
+    { href: '#case', label: { it: 'Le Case', en: 'Apartments' } },
     { href: '#chi-siamo', label: { it: 'Chi siamo', en: 'About' } },
-    { href: '#servizi', label: { it: 'Servizi', en: 'Services' } },
     { href: '/galleria', label: { it: 'Galleria', en: 'Gallery' } },
     { href: '#faq', label: { it: 'FAQ', en: 'FAQ' } },
     { href: '#contatti', label: { it: 'Contatti', en: 'Contact' } },
@@ -45,108 +55,358 @@ export const site = {
 
   // ─── Hero ────────────────────────────────────────────────────
   hero: {
-    eyebrow: { it: 'Benvenuti', en: 'Welcome' },
+    eyebrow: { it: 'Affitti brevi a Milano · Lambrate', en: 'Short-term stays in Milan · Lambrate' },
     title: {
-      it: 'Benvenuti nel nostro mondo',
-      en: 'Welcome to our world',
+      it: 'Tre case nel cuore universitario di Milano',
+      en: "Three homes in Milan's university heart",
     },
     subtitle: {
-      it: 'Un posto autentico dove scoprire qualcosa di unico. Vieni a trovarci e lasciati sorprendere.',
-      en: 'An authentic place to discover something unique. Come visit us and let yourself be surprised.',
+      it: 'Spigolatrice di Lambrate è una piccola realtà di affitti brevi gestita con cura da Pamela. Tre appartamenti, lo stesso quartiere vivo a due passi dalla metro, a dieci minuti dal Duomo.',
+      en: 'Spigolatrice di Lambrate is a small short-stay rental gently hosted by Pamela. Three apartments, the same lively neighbourhood two minutes from the metro, ten minutes from the Duomo.',
     },
-    image: 'https://picsum.photos/seed/casa-hero/1920/1080',
-    cta: { it: 'Scrivici ora', en: 'Get in touch' },
+    image: '/images/case/buschi/01.jpg',
+    cta: { it: 'Scopri le case', en: 'Discover the homes' },
   },
 
   // ─── About ───────────────────────────────────────────────────
   about: {
-    eyebrow: { it: 'La nostra storia', en: 'Our story' },
-    title: { it: 'Chi siamo e cosa facciamo', en: 'Who we are and what we do' },
-    image: 'https://picsum.photos/seed/casa-about/1200/900',
+    eyebrow: { it: 'Chi siamo', en: 'Who we are' },
+    title: { it: 'Tre case, una sola cura per gli ospiti', en: 'Three homes, one care for guests' },
+    image: '/images/case/donegani/02.jpg',
     body: [
       {
-        it: "Siamo una piccola realtà nata dalla passione e dall'amore per quello che facciamo. Ogni giorno ci impegniamo per offrire il meglio a chi ci sceglie, con cura per ogni dettaglio.",
-        en: 'We are a small reality born from passion and love for what we do. Every day we strive to offer the best to those who choose us, with care for every detail.',
+        it: 'Spigolatrice di Lambrate nasce dalla passione di Pamela per la sua città e per l\'accoglienza. Da oltre dieci anni accompagniamo viaggiatori, studenti, famiglie e professionisti che visitano Milano: oggi gestiamo tre appartamenti, tutti nel quartiere universitario di Lambrate, ciascuno con la sua personalità.',
+        en: "Spigolatrice di Lambrate was born from Pamela's love for her city and for hospitality. For more than ten years we have hosted travellers, students, families and professionals visiting Milan. Today we run three apartments, all in Milan's Lambrate university district — each with its own personality.",
       },
       {
-        it: 'La nostra filosofia è semplice: qualità, autenticità e rispetto. Valori che trasmettiamo in ogni cosa che facciamo.',
-        en: 'Our philosophy is simple: quality, authenticity and respect. Values we convey in everything we do.',
+        it: 'Tre case "amate dagli ospiti" su Airbnb, con valutazioni medie tra 4,92 e 4,99 stelle. La differenza la fa l\'attenzione ai dettagli: check-in flessibile, comunicazione in tempo reale, case sempre pulite e attrezzate con tutto il necessario.',
+        en: 'Three "Guest Favorite" homes on Airbnb, with average ratings between 4.92 and 4.99. The difference is in the details: flexible check-in, real-time communication, spotless homes equipped with everything you need.',
       },
     ],
   },
 
-  // ─── Servizi ─────────────────────────────────────────────────
-  services: {
-    eyebrow: { it: 'Quello che offriamo', en: 'What we offer' },
-    title: { it: 'I nostri servizi', en: 'Our services' },
-    items: [
+  // ─── Quartiere (condiviso fra le 3 case) ─────────────────────
+  neighborhood: {
+    title: { it: 'Lambrate, il quartiere', en: 'Lambrate, the district' },
+    body: [
       {
-        icon: '🌿',
-        image: 'https://picsum.photos/seed/casa-service1/800/600',
-        title: { it: 'Primo Servizio', en: 'First Service' },
-        description: {
-          it: 'Una descrizione breve e chiara del primo servizio che offriamo. Cambia questo testo con quello che fa al caso tuo.',
-          en: 'A short and clear description of the first service we offer. Replace this text with what suits your business.',
-        },
+        it: 'Tutte e tre le case si trovano nel quartiere universitario di Lambrate, una delle aree più vivaci di Milano: sicuro, ben servito, pieno di negozi, supermercati, ristoranti, bar e farmacie. Il supermercato Carrefour sotto casa è aperto dalle 7 a mezzanotte.',
+        en: "All three apartments are in Milan's Lambrate university district — one of the city's liveliest, safest and best-served areas, full of shops, supermarkets, restaurants, bars and pharmacies. The Carrefour supermarket nearby is open 7 a.m. to midnight.",
       },
       {
-        icon: '🏡',
-        image: 'https://picsum.photos/seed/casa-service2/800/600',
-        title: { it: 'Secondo Servizio', en: 'Second Service' },
-        description: {
-          it: 'Una descrizione breve e chiara del secondo servizio. Puoi aggiungere o rimuovere elementi liberamente.',
-          en: 'A short and clear description of the second service. You can freely add or remove elements.',
-        },
+        it: 'A due minuti a piedi dalla metropolitana M2 (linea verde) e dalla stazione FS di Lambrate: Piazza Duomo è a dieci minuti, la Stazione Centrale a dieci minuti, l\'aeroporto di Linate raggiungibile con un bus diretto.',
+        en: 'Two minutes on foot to the M2 metro (green line) and the Lambrate railway station: ten minutes to Piazza Duomo, ten minutes to Milano Centrale, and a direct bus to Linate airport.',
       },
       {
-        icon: '✨',
-        image: 'https://picsum.photos/seed/casa-service3/800/600',
-        title: { it: 'Terzo Servizio', en: 'Third Service' },
-        description: {
-          it: 'Una descrizione breve e chiara del terzo servizio. Il design si adatta automaticamente al numero di elementi.',
-          en: 'A short and clear description of the third service. The design automatically adapts to the number of items.',
-        },
+        it: 'A pochi passi: Politecnico di Milano Campus Leonardo, Università Statale, CNR, East Market e Fuori Salone di via Ventura, Istituto Nazionale dei Tumori, Istituto Neurologico Besta, Istituto Clinico Città Studi. L\'auto non serve, ma se l\'avete c\'è un parcheggio custodito sotto casa.',
+        en: 'A short walk away: Politecnico di Milano Leonardo Campus, Università Statale, CNR, East Market and Fuori Salone in Via Ventura, Istituto Nazionale dei Tumori, Istituto Neurologico Besta, Istituto Clinico Città Studi. You won\'t need a car — but if you have one, there\'s a guarded car park downstairs.',
       },
     ],
   },
 
-  // ─── Galleria ────────────────────────────────────────────────
-  // width/height: dimensioni dell'immagine (servono al masonry layout).
-  // caption: opzionale, appare nel lightbox.
-  // Le prime 5 vengono mostrate in homepage (bento). Tutte appaiono su /galleria (masonry).
+  // ─── Le tre case ─────────────────────────────────────────────
+  // Ogni Property è una pagina dedicata in /[locale]/case/[slug]
+  properties: [
+    // ─── DONEGANI ──────────────────────────────────────────────
+    {
+      slug: 'donegani',
+      name: { it: 'Casa Donegani', en: 'Donegani Apartment' },
+      address: 'Piazza Donegani, Milano',
+      airbnbUrl: 'https://airbnb.com/h/spigolatrice3',
+      cardImage: '/images/case/donegani/01.jpg',
+      heroImage: '/images/case/donegani/02.jpg',
+      tagline: {
+        it: 'Ristrutturato da poco, accogliente, ideale per coppie e piccole famiglie.',
+        en: 'Recently renovated, cosy, ideal for couples and small families.',
+      },
+      features: {
+        guests: 4,
+        bedrooms: 1,
+        beds: { it: '1 camera grande fino a 4 persone', en: '1 large bedroom up to 4 people' },
+        bathrooms: 1,
+        sqm: undefined as number | undefined,
+        outdoor: undefined as { it: string; en: string } | undefined,
+      },
+      amenities: [
+        { it: 'WiFi', en: 'Wi-Fi' },
+        { it: 'Lavatrice', en: 'Washing machine' },
+        { it: 'Asciugatrice', en: 'Dryer' },
+        { it: 'Riscaldamento', en: 'Heating' },
+        { it: 'Ventilatori a soffitto', en: 'Ceiling fans' },
+        { it: 'Cucina attrezzata', en: 'Fully equipped kitchen' },
+        { it: 'Asciugamani e lenzuola', en: 'Towels and linens' },
+        { it: 'Ascensore', en: 'Elevator' },
+      ],
+      longDescription: [
+        {
+          it: 'Casa molto carina, ristrutturata da poco da un architetto esperto di design. C\'è una stanza da letto grande dove possono dormire fino a 4 persone, una bella cucina vivibile e un bagno.',
+          en: "A very pretty home, recently renovated by an architect with a design eye. There is one large bedroom that sleeps up to four people, a generous kitchen and a bathroom.",
+        },
+        {
+          it: 'L\'appartamento è nel quartiere universitario, con negozi, supermercati, bar, farmacie e ristoranti a due passi. La metropolitana è a due minuti, il modo migliore per muoversi a Milano. In dieci minuti si raggiunge Piazza Duomo.',
+          en: 'The apartment sits in the university district, with shops, supermarkets, bars, pharmacies and restaurants on the doorstep. The metro is two minutes away — the best way to get around Milan. Piazza Duomo is a ten-minute ride.',
+        },
+        {
+          it: 'La casa è completamente attrezzata. C\'è tutto per la cucina; gli ospiti ricevono asciugamani, lenzuola e coperte; in bagno trovate saponi e bagnoschiuma.',
+          en: "The home is fully equipped. The kitchen has everything you need; guests receive towels, sheets and blankets; the bathroom is stocked with soap and shower gel.",
+        },
+      ],
+      ratings: {
+        overall: 4.99,
+        count: 91,
+        topPercent: 1,
+        breakdown: { cleanliness: 5.0, accuracy: 5.0, checkin: 5.0, communication: 5.0, location: 4.9, value: 5.0 },
+      },
+      reviews: [
+        {
+          author: 'Arianna',
+          location: '',
+          date: 'Aprile 2026',
+          text: "Pamela è una persona d'oro davvero, mi ha mandato tutti i dettagli per il self check-in e ha avuto premura che tutto fosse perfetto, rimanendo a disposizione durante il mio soggiorno.",
+        },
+        {
+          author: 'Antonio',
+          location: '',
+          date: 'Novembre 2025',
+          text: 'Appartamento pulito e ben organizzato in zona tranquilla dove è possibile trovare tutto nelle vicinanze. Metro linea verde ad un passo. Host gentile e disponibile. Super!',
+        },
+        {
+          author: 'Michelle',
+          location: 'Los Angeles, California',
+          date: 'Marzo 2026',
+          text: "This was our last stop on our trip and I'm glad it was! Plenty of space to organize ourselves for packing in this lovely apartment. There's an on-site elevator which was incredibly helpful.",
+        },
+        {
+          author: 'Elsa',
+          location: '',
+          date: 'Aprile 2026',
+          text: "Nous avons passé deux nuits chez Pamela. Le logement est très bien, fonctionnel, très propre et très confortable. Le quartier est calme et le métro à proximité.",
+        },
+        {
+          author: 'Christiane',
+          location: '',
+          date: 'Aprile 2026',
+          text: 'Kommunikation war ganz easy und unkompliziert, flexibler Check-in sehr praktisch. Die Gegend hatte eine gute Atmosphäre — ruhig aber zwischendurch auch viel los.',
+        },
+      ],
+      // Tutte le foto della casa, in ordine narrativo. Layout per la pagina /galleria
+      gallery: buildGallery('donegani', 33),
+    },
+
+    // ─── GROSSICH ──────────────────────────────────────────────
+    {
+      slug: 'grossich',
+      name: { it: 'Casa Grossich', en: 'Grossich Apartment' },
+      address: 'Via Grossich, Milano',
+      airbnbUrl: 'https://airbnb.com/h/spigolatrice2',
+      cardImage: '/images/case/grossich/01.jpg',
+      heroImage: '/images/case/grossich/02.jpg',
+      tagline: {
+        it: 'Due camere, grande terrazzo, fino a cinque ospiti. Silenziosa e luminosa.',
+        en: 'Two bedrooms, large terrace, sleeps up to five. Quiet and bright.',
+      },
+      features: {
+        guests: 5,
+        bedrooms: 2,
+        beds: { it: '1 matrimoniale + 1 singolo · 2 singoli nell\'altra camera', en: '1 double + 1 single · 2 singles in the other room' },
+        bathrooms: 1,
+        sqm: undefined as number | undefined,
+        outdoor: { it: 'Ampia terrazza', en: 'Large terrace' } as { it: string; en: string } | undefined,
+      },
+      amenities: [
+        { it: 'WiFi', en: 'Wi-Fi' },
+        { it: 'Aria condizionata in ogni camera', en: 'Air conditioning in every room' },
+        { it: 'Lavatrice', en: 'Washing machine' },
+        { it: 'Asciugatrice', en: 'Dryer' },
+        { it: 'Lavastoviglie', en: 'Dishwasher' },
+        { it: 'Riscaldamento', en: 'Heating' },
+        { it: 'Cucina attrezzata', en: 'Fully equipped kitchen' },
+        { it: 'Ferro da stiro', en: 'Iron' },
+        { it: 'Phon', en: 'Hair dryer' },
+        { it: 'Terrazza con sedie e tavolino', en: 'Terrace with table and chairs' },
+        { it: 'Ascensore', en: 'Elevator' },
+      ],
+      longDescription: [
+        {
+          it: 'Casa accogliente e moderna, finemente ristrutturata. Due camere da letto, cucina completamente attrezzata, bagno e una grande terrazza con tavolino e sedie. In una delle due camere c\'è un letto matrimoniale e un terzo letto singolo; nell\'altra è possibile avere due letti singoli. Si arriva fino a cinque persone.',
+          en: 'A cosy, modern, finely renovated home. Two bedrooms, fully equipped kitchen, bathroom and a large terrace with table and chairs. One bedroom has a double bed and a third single bed; the other can be set up with two singles. Sleeps up to five.',
+        },
+        {
+          it: 'In cucina trovate bollitore, microonde, macchina del caffè, fornelli, frigorifero, lavastoviglie e pentole. In bagno doccia, bidet, lavatrice e asciugatrice, shampoo, bagnoschiuma e phon. L\'aria condizionata è in tutte e due le camere.',
+          en: "The kitchen has kettle, microwave, coffee machine, hob, fridge, dishwasher and cookware. The bathroom has shower, bidet, washer and dryer, shampoo, shower gel and hair dryer. Air conditioning runs in both bedrooms.",
+        },
+        {
+          it: 'L\'appartamento è molto silenzioso, ideale per godersi Milano dopo una giornata fuori. È nel quartiere universitario, a due minuti dalla metropolitana M2 e a dieci minuti da Piazza Duomo.',
+          en: 'The apartment is very quiet, ideal to unwind after a day out in Milan. It sits in the university district, two minutes from the M2 metro and ten from Piazza Duomo.',
+        },
+      ],
+      ratings: {
+        overall: 4.92,
+        count: 103,
+        topPercent: 10,
+        breakdown: { cleanliness: 4.9, accuracy: 4.9, checkin: 5.0, communication: 5.0, location: 4.9, value: 4.9 },
+      },
+      reviews: [
+        {
+          author: 'Diana',
+          location: '',
+          date: 'Marzo 2026',
+          text: 'Host molto disponibile, davvero un posto carino e una bella, ampia cucina.',
+        },
+        {
+          author: 'Emanuele',
+          location: '',
+          date: 'Aprile 2026',
+          text: 'Comunicazione buonissima! Grazie mille!',
+        },
+        {
+          author: 'Yemisi',
+          location: 'Whitby, Canada',
+          date: 'Aprile 2026',
+          text: "We had a great visit to Milan at Pamela's unit. The location is close to the train station and easy to commute. The unit was very clean and Pamela was hospitable — she left some coffee.",
+        },
+        {
+          author: 'Dominik',
+          location: 'Zurigo, Svizzera',
+          date: 'Marzo 2026',
+          text: 'We loved our stay in Milan. Pamela was friendly and responded quickly. Her apartment was big enough for two couples. It is located a few minutes walk from the subway.',
+        },
+        {
+          author: 'Lillian & Margaret',
+          location: '',
+          date: 'Febbraio 2026',
+          text: 'This was a fantastic place to stay for both the price and the location. Was exactly like the description and pictures posted on the website. She was super flexible with our check-in.',
+        },
+        {
+          author: 'Luciene',
+          location: '',
+          date: 'Maggio 2026',
+          text: 'Excelente espaço. Anfitriã dedicada. Localização perfeita para se deslocar por Milão. Ambiente muito tranquilo e familiar. Metrô a poucos passos.',
+        },
+      ],
+      gallery: buildGallery('grossich', 35),
+    },
+
+    // ─── BUSCHI ────────────────────────────────────────────────
+    {
+      slug: 'buschi',
+      name: { it: 'Casa Buschi', en: 'Buschi Apartment' },
+      address: 'Via Averardo Buschi, Milano',
+      airbnbUrl: 'https://airbnb.com/h/spigolatrice1',
+      cardImage: '/images/case/buschi/01.jpg',
+      heroImage: '/images/case/buschi/02.jpg',
+      tagline: {
+        it: '70 mq spaziosi, due camere flessibili, fino a sette ospiti. Perfetta per gruppi e famiglie.',
+        en: '70 sqm of space, two flexible bedrooms, sleeps up to seven. Perfect for groups and families.',
+      },
+      features: {
+        guests: 7,
+        bedrooms: 2,
+        beds: { it: '1 matrimoniale + 1 singolo · fino a 4 letti nell\'altra camera', en: '1 double + 1 single · up to 4 beds in the other room' },
+        bathrooms: 1,
+        sqm: 70 as number | undefined,
+        outdoor: { it: 'Balcone', en: 'Balcony' } as { it: string; en: string } | undefined,
+      },
+      amenities: [
+        { it: 'WiFi super veloce', en: 'High-speed Wi-Fi' },
+        { it: 'Aria condizionata', en: 'Air conditioning' },
+        { it: 'Lavatrice', en: 'Washing machine' },
+        { it: 'Asciugatrice', en: 'Dryer' },
+        { it: 'Riscaldamento', en: 'Heating' },
+        { it: 'Cucina ampia attrezzata', en: 'Large fully equipped kitchen' },
+        { it: 'Ferro da stiro', en: 'Iron' },
+        { it: 'Phon', en: 'Hair dryer' },
+        { it: 'Balcone con sedie e tavolino', en: 'Balcony with table and chairs' },
+        { it: 'Ripostiglio', en: 'Storage room' },
+        { it: 'Ascensore', en: 'Elevator' },
+      ],
+      longDescription: [
+        {
+          it: 'Spaziosa e accogliente, circa 70 metri quadrati. Due camere da letto, una cucina grande, bagno e balcone. In una delle camere c\'è un letto matrimoniale ed è possibile aggiungere un letto singolo; nell\'altra puoi scegliere la soluzione con 2, 3 o 4 letti, singoli o matrimoniali. Si arriva fino a sette persone.',
+          en: 'Spacious and welcoming, about 70 square metres. Two bedrooms, a large kitchen, bathroom and balcony. One bedroom has a double bed and an optional single bed; the other can be set up with two, three or four beds — single or double. Sleeps up to seven.',
+        },
+        {
+          it: 'La cucina e il bagno sono ampi: è possibile pranzare insieme fino a sette persone. C\'è un bel balcone attrezzato. Trovate tutto il necessario in cucina e in bagno: shampoo, bagnoschiuma, asciugamani, asse e ferro da stiro.',
+          en: 'The kitchen and bathroom are both large — you can comfortably dine seven at the table. There is a nice furnished balcony. Everything is provided in the kitchen and bathroom: shampoo, shower gel, towels, iron and ironing board.',
+        },
+        {
+          it: 'Nel quartiere universitario, a due minuti dalla metropolitana M2 di Lambrate e dieci minuti da Piazza Duomo. Ideale per gruppi, famiglie numerose e amici in viaggio.',
+          en: "In the university district, two minutes from M2 Lambrate metro and ten minutes from Piazza Duomo. Ideal for groups, larger families and friends travelling together.",
+        },
+      ],
+      ratings: {
+        overall: 4.92,
+        count: 98,
+        topPercent: 5,
+        breakdown: { cleanliness: 4.9, accuracy: 4.9, checkin: 4.9, communication: 5.0, location: 4.9, value: 4.9 },
+      },
+      reviews: [
+        {
+          author: 'Ivana',
+          location: '',
+          date: 'Ottobre 2025',
+          text: "Il soggiorno è stato molto piacevole, l'host Pamela sempre disponibile ad ogni richiesta o informazione, soprattutto in modo molto veloce. L'appartamento ha tutto ciò che occorre.",
+        },
+        {
+          author: 'Matteo',
+          location: '',
+          date: 'Marzo 2026',
+          text: 'Pamela è la migliore host che mi abbia mai accolto. La disponibilità in persona!!! Consigliatissimo.',
+        },
+        {
+          author: 'Bojidara',
+          location: '',
+          date: 'Maggio 2026',
+          text: "We had a great time staying at Pamela's place. It was big enough for five people, comfortable to reach the center of the city, next to a metro and train station.",
+        },
+        {
+          author: 'Marian',
+          location: 'Berrien Center, Michigan',
+          date: 'Maggio 2026',
+          text: 'The apartment is great, had everything you need. There was both a washer and dryer. The location was great with a short walk to the metro.',
+        },
+        {
+          author: 'Zofia',
+          location: '',
+          date: 'Aprile 2026',
+          text: 'Bardzo polecam zatrzymać się u Pameli podczas pobytu w Mediolanie. Apartament znajduje się 3 min od metra, niedaleko centrum, w spokojnej okolicy.',
+        },
+        {
+          author: 'Ingrid',
+          location: 'Città del Messico, Messico',
+          date: 'Aprile 2026',
+          text: "Pamela's place is good for families like mine or medium size groups. You can walk to the supermarket, the metro is just 3 min walk and you can find delicious local food around.",
+        },
+      ],
+      gallery: buildGallery('buschi', 20),
+    },
+  ],
+
+  // ─── Galleria (anteprima home — 5 foto top-pick) ─────────────
   gallery: {
     title: { it: 'Galleria', en: 'Gallery' },
     intro: {
-      it: 'Uno sguardo attraverso il nostro mondo, raccolto in immagini.',
-      en: 'A glimpse through our world, collected in images.',
+      it: 'Uno sguardo dentro le tre case di Spigolatrice di Lambrate.',
+      en: 'A glimpse inside the three Spigolatrice di Lambrate apartments.',
     },
-    viewAll: { it: 'Vedi tutta la galleria', en: 'View all photos' },
+    viewAll: { it: 'Vedi tutte le foto', en: 'View all photos' },
     images: [
-      // layout: 'full' (span 2 cols, landscape) | 'half' (1 col, square-ish) | 'tall' (1 col × 2 rows, portrait)
-      // Sequenza demo: pattern variato che mostra tutti i tipi di moduli Airbnb-style
-      { src: 'https://picsum.photos/seed/casa-g1/1600/900',  alt: 'Vista panoramica', width: 1600, height: 900,  layout: 'full', caption: { it: 'Vista panoramica al tramonto', en: 'Panoramic sunset view' } },
-      { src: 'https://picsum.photos/seed/casa-g2/800/800',   alt: 'Cortile',           width: 800,  height: 800,  layout: 'half', caption: { it: 'Primavera nel cortile',        en: 'Spring in the courtyard' } },
-      { src: 'https://picsum.photos/seed/casa-g3/800/800',   alt: 'Dettaglio antico',  width: 800,  height: 800,  layout: 'half', caption: { it: 'Particolare antico',           en: 'Antique detail' } },
-      { src: 'https://picsum.photos/seed/casa-g4/800/800',   alt: 'Salone',            width: 800,  height: 800,  layout: 'half', caption: { it: 'Il salone principale',         en: 'The main hall' } },
-      { src: 'https://picsum.photos/seed/casa-g5/800/1200',  alt: 'Facciata',          width: 800,  height: 1200, layout: 'tall', caption: { it: 'Dettaglio della facciata',     en: 'Façade detail' } },
-      { src: 'https://picsum.photos/seed/casa-g6/800/800',   alt: 'Cucina',            width: 800,  height: 800,  layout: 'half', caption: { it: 'Cucina tradizionale',          en: 'Traditional kitchen' } },
-      { src: 'https://picsum.photos/seed/casa-g7/1600/800',  alt: 'Notturno',          width: 1600, height: 800,  layout: 'full', caption: { it: 'Notturno',                      en: 'Nighttime' } },
-      { src: 'https://picsum.photos/seed/casa-g8/800/800',   alt: 'Giardino',          width: 800,  height: 800,  layout: 'half', caption: { it: 'Il giardino',                   en: 'The garden' } },
-      { src: 'https://picsum.photos/seed/casa-g9/800/800',   alt: 'Angolo lettura',    width: 800,  height: 800,  layout: 'half', caption: { it: "L'angolo lettura",             en: 'The reading nook' } },
-      { src: 'https://picsum.photos/seed/casa-g10/800/1200', alt: 'Lucernario',        width: 800,  height: 1200, layout: 'tall', caption: { it: 'Lucernario al mattino',         en: 'Morning skylight' } },
-      { src: 'https://picsum.photos/seed/casa-g11/800/800',  alt: 'Scala',             width: 800,  height: 800,  layout: 'half', caption: { it: 'Scala in legno',               en: 'Wooden staircase' } },
-      { src: 'https://picsum.photos/seed/casa-g12/800/800',  alt: 'Ingresso',          width: 800,  height: 800,  layout: 'half', caption: { it: "L'ingresso",                   en: 'The entrance' } },
+      { src: '/images/case/buschi/02.jpg',  alt: 'Casa Buschi · cucina',         width: 1600, height: 900,  layout: 'full' as const, caption: { it: 'Casa Buschi · cucina e zona pranzo', en: 'Buschi · kitchen and dining' } },
+      { src: '/images/case/donegani/02.jpg', alt: 'Casa Donegani · salotto',      width: 1200, height: 1200, layout: 'half' as const, caption: { it: 'Casa Donegani',                   en: 'Donegani' } },
+      { src: '/images/case/grossich/01.jpg', alt: 'Casa Grossich · camera',       width: 1200, height: 1200, layout: 'half' as const, caption: { it: 'Casa Grossich',                   en: 'Grossich' } },
+      { src: '/images/case/buschi/07.jpg',   alt: 'Casa Buschi · camera',         width: 1200, height: 1200, layout: 'half' as const, caption: { it: 'Casa Buschi · camera',            en: 'Buschi · bedroom' } },
+      { src: '/images/case/donegani/22.jpg', alt: 'Casa Donegani · dettagli',     width: 1200, height: 1200, layout: 'half' as const, caption: { it: 'Tutta la galleria',               en: 'See the full gallery' } },
     ],
   },
 
   // ─── CTA banner ──────────────────────────────────────────────
   cta: {
-    title: { it: 'Vuoi saperne di più?', en: 'Want to know more?' },
+    title: { it: 'Pronto a venire a Milano?', en: 'Ready to come to Milan?' },
     description: {
-      it: 'Contattaci, saremo felici di rispondere a ogni tua domanda.',
-      en: "Contact us, we'll be happy to answer any of your questions.",
+      it: 'Scrivici per qualsiasi domanda, oppure prenota direttamente su Airbnb. Rispondiamo entro poche ore.',
+      en: "Drop us a line for any question, or book directly on Airbnb. We reply within a few hours.",
     },
-    button: { it: 'Scrivici ora', en: 'Get in touch' },
+    button: { it: 'Scrivici', en: 'Contact us' },
   },
 
   // ─── FAQ ─────────────────────────────────────────────────────
@@ -154,34 +414,45 @@ export const site = {
     title: { it: 'Domande frequenti', en: 'Frequently asked questions' },
     items: [
       {
-        q: { it: 'Come posso contattarvi?', en: 'How can I contact you?' },
+        q: { it: 'Come funziona il check-in?', en: 'How does check-in work?' },
         a: {
-          it: 'Puoi contattarci via email o telefono. Risponderemo entro 24 ore dalla tua richiesta.',
-          en: 'You can contact us by email or phone. We will respond within 24 hours of your request.',
+          it: 'Self check-in con istruzioni inviate per tempo. Pamela resta in contatto via WhatsApp per qualsiasi necessità, anche fuori dagli orari standard.',
+          en: 'Self check-in with instructions sent in advance. Pamela stays in touch on WhatsApp for anything you need, also outside standard hours.',
         },
       },
       {
-        q: { it: 'Dove siete situati?', en: 'Where are you located?' },
+        q: { it: 'Dove si trovano gli appartamenti?', en: 'Where are the apartments?' },
         a: {
-          it: 'Siamo facilmente raggiungibili. Puoi trovare la nostra posizione esatta nella sezione contatti con la mappa.',
-          en: 'We are easily reachable. You can find our exact location in the contact section with the map.',
+          it: 'Tutte e tre le case sono nel quartiere universitario di Lambrate, Milano. A due minuti dalla metropolitana M2 e a dieci minuti da Piazza Duomo.',
+          en: "All three apartments are in Milan's Lambrate university district. Two minutes from the M2 metro and ten from Piazza Duomo.",
         },
       },
       {
-        q: { it: 'Quali sono gli orari?', en: 'What are your hours?' },
+        q: { it: 'C\'è il parcheggio?', en: 'Is there parking?' },
         a: {
-          it: 'Siamo operativi dal lunedì al venerdì dalle 9 alle 18. Il sabato mattina su appuntamento.',
-          en: 'We are open Monday to Friday from 9am to 6pm. Saturday morning by appointment.',
+          it: 'In zona è facile parcheggiare gratuitamente sulla strada. In alternativa, sotto casa c\'è un parcheggio custodito a pagamento.',
+          en: 'Free street parking is easy to find in the area. Alternatively, there is a paid guarded car park downstairs.',
         },
       },
       {
-        q: {
-          it: 'Come posso prenotare o richiedere informazioni?',
-          en: 'How can I book or request information?',
-        },
+        q: { it: 'Quanti ospiti possono soggiornare?', en: 'How many guests can stay?' },
         a: {
-          it: 'Usa il modulo di contatto, oppure scrivici direttamente via email o telefono.',
-          en: 'Use the contact form, or write to us directly by email or phone.',
+          it: 'Donegani fino a 4 ospiti, Grossich fino a 5, Buschi fino a 7. Le configurazioni dei letti sono flessibili: scrivici per studiare quella migliore per te.',
+          en: 'Donegani sleeps up to 4, Grossich up to 5, Buschi up to 7. Bed configurations are flexible — write us to plan the right one for you.',
+        },
+      },
+      {
+        q: { it: 'Cosa trovo in casa?', en: 'What will I find in the apartment?' },
+        a: {
+          it: 'Cucina completamente attrezzata, lavatrice (e asciugatrice in due delle tre case), WiFi, riscaldamento, aria condizionata o ventilatori. Asciugamani, lenzuola, shampoo, bagnoschiuma e phon sono già in casa.',
+          en: 'Fully equipped kitchen, washing machine (and dryer in two of the three homes), Wi-Fi, heating, air conditioning or fans. Towels, sheets, shampoo, shower gel and hair dryer are already provided.',
+        },
+      },
+      {
+        q: { it: 'Accettate pagamenti in criptovalute?', en: 'Do you accept cryptocurrency payments?' },
+        a: {
+          it: 'Sì, oltre ai metodi standard di Airbnb accettiamo anche Bitcoin e altre criptovalute su accordo diretto. Scrivici per i dettagli.',
+          en: 'Yes — in addition to Airbnb\'s standard methods we also accept Bitcoin and other cryptocurrencies by direct arrangement. Get in touch for details.',
         },
       },
     ],
@@ -196,12 +467,12 @@ export const site = {
       message: { it: 'Il tuo messaggio', en: 'Your message' },
       send: { it: 'Invia messaggio', en: 'Send message' },
       success: {
-        it: 'Messaggio inviato! Ti risponderemo presto.',
+        it: 'Messaggio inviato! Ti risponderemo a breve.',
         en: 'Message sent! We will get back to you soon.',
       },
       error: {
-        it: 'Si è verificato un errore. Riprova o scrivici via email.',
-        en: 'An error occurred. Please try again or write to us by email.',
+        it: 'Si è verificato un errore. Riprova o scrivici direttamente via email o WhatsApp.',
+        en: 'An error occurred. Please try again or write us directly by email or WhatsApp.',
       },
     },
   },
@@ -209,6 +480,7 @@ export const site = {
   // ─── Footer ──────────────────────────────────────────────────
   footer: {
     rights: { it: 'Tutti i diritti riservati', en: 'All rights reserved' },
+    host: { it: 'Host: Pamela Pinna', en: 'Host: Pamela Pinna' },
   },
 
   // ─── Theme toggle (a11y) ─────────────────────────────────────
@@ -217,3 +489,27 @@ export const site = {
     toggleLight: { it: 'Attiva modalità chiara', en: 'Enable light mode' },
   },
 } as const
+
+// ─── Helper: costruisce la gallery di una casa dalle foto in public/images/case/{slug}/01..N.jpg ──
+// Il layout alterna in modo da generare un pattern Airbnb-style nella griglia masonry.
+function buildGallery(slug: 'donegani' | 'grossich' | 'buschi', count: number) {
+  const out: Array<{ src: string; alt: string; width: number; height: number; layout: 'full' | 'half' | 'tall'; caption: { it: string; en: string } }> = []
+  for (let i = 1; i <= count; i++) {
+    const n = String(i).padStart(2, '0')
+    // Pattern: ogni 7 foto una full, ogni 5 una tall, le altre half
+    const layout: 'full' | 'half' | 'tall' = i % 7 === 1 ? 'full' : i % 5 === 0 ? 'tall' : 'half'
+    out.push({
+      src: `/images/case/${slug}/${n}.jpg`,
+      alt: `${slug} ${n}`,
+      width: layout === 'tall' ? 800 : layout === 'full' ? 1600 : 1200,
+      height: layout === 'tall' ? 1200 : layout === 'full' ? 900 : 1200,
+      layout,
+      caption: { it: '', en: '' },
+    })
+  }
+  return out
+}
+
+// Tipo helper esportato (usato dai componenti per tipizzare singole property)
+export type Property = (typeof site.properties)[number]
+export type PropertySlug = Property['slug']

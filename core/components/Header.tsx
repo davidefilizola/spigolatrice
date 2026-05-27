@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'
@@ -77,9 +78,22 @@ export default function Header({ locale }: HeaderProps) {
             <Link
               href={`/${locale}`}
               onClick={handleLogoClick}
-              className={`font-serif text-xl tracking-tight transition-colors ${titleColor}`}
+              className="flex items-center gap-2.5 transition-opacity hover:opacity-90"
+              aria-label={site.name}
             >
-              {site.name}
+              <span className="relative h-10 w-10 sm:h-11 sm:w-11 shrink-0">
+                <Image
+                  src="/images/logo.png"
+                  alt={site.name}
+                  fill
+                  sizes="44px"
+                  className="object-contain rounded-full shadow-sm"
+                  priority
+                />
+              </span>
+              <span className={`hidden sm:inline font-serif text-base lg:text-lg tracking-tight transition-colors ${titleColor}`}>
+                {site.name}
+              </span>
             </Link>
 
             {/* Desktop nav */}
@@ -175,8 +189,19 @@ function MobileMenu({
       >
         {/* Top bar */}
         <div className="flex items-center justify-between h-16 px-4 sm:px-6 border-b border-stone-200 dark:border-stone-800">
-          <span className="font-serif text-xl text-stone-900 dark:text-stone-100">
-            {site.name}
+          <span className="flex items-center gap-2.5">
+            <span className="relative h-9 w-9 shrink-0">
+              <Image
+                src="/images/logo.png"
+                alt={site.name}
+                fill
+                sizes="36px"
+                className="object-contain rounded-full"
+              />
+            </span>
+            <span className="font-serif text-base text-stone-900 dark:text-stone-100 leading-tight">
+              {site.name}
+            </span>
           </span>
           <button
             onClick={onClose}

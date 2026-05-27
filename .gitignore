@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Sorgenti del cliente (foto originali, documenti).
+# Vanno tenute FUORI da questo workspace: il dev server di Next può
+# bloccarsi quando watcha cartelle pesanti, e non vogliamo committarle.
+/Assets
+*.docx
+~$*
+
+# Local plan files (auto-generato da Claude Code)
+/.claude/plans/
+/.claude/settings.local.json
