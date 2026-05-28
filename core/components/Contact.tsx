@@ -27,24 +27,55 @@ export default function Contact({ locale }: ContactProps) {
     e.preventDefault()
     setStatus('sending')
     const form = e.currentTarget
-    const data = {
-      name: (form.elements.namedItem('name') as HTMLInputElement).value,
-      email: (form.elements.namedItem('email') as HTMLInputElement).value,
-      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+    const name = (form.elements.namedItem('name') as HTMLInputElement).value
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value
+    const message = (form.elements.namedItem('message') as HTMLTextAreaElement).value
+
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
+
+    if (!accessKey) {
+      // Setup non ancora pronto: fallback sull'API locale (logga, non invia)
+      try {
+        await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, message }),
+        })
+        setStatus('success')
+        form.reset()
+      } catch {
+        setStatus('error')
+      }
+      return
     }
+
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `Nuova richiesta dal sito — ${name}`,
+          from_name: 'Spigolatrice di Lambrate · sito',
+          name,
+          email,
+          message,
+          replyto: email,
+        }),
       })
-      if (res.ok) {
+      const data = await res.json().catch(() => ({}))
+      if (res.ok && data.success) {
         setStatus('success')
         form.reset()
       } else {
+        console.error('Web3Forms error:', data)
         setStatus('error')
       }
-    } catch {
+    } catch (err) {
+      console.error('Contact form fetch error:', err)
       setStatus('error')
     }
   }
