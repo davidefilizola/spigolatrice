@@ -198,7 +198,7 @@ export const site = {
       { src: '/images/postit/01.jpg', alt: 'Cuore Kinder, biglietto ospite',     tilt: -3 },
       { src: '/images/postit/02.jpg', alt: 'Biglietto Veena & Venkat',           tilt: 2  },
       { src: '/images/postit/03.jpg', alt: 'Biglietto Superhost',                tilt: -2 },
-      { src: '/images/postit/04.jpg', alt: 'Post-it Adriana',                     tilt: 4  },
+      { src: '/images/postit/04.jpg', alt: 'Guestbook con disegni dei bambini',  tilt: 4  },
     ],
     ctaLabel: { it: 'Leggi tutte le recensioni su Airbnb', en: 'Read all reviews on Airbnb' },
   },
