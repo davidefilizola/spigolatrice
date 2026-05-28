@@ -65,7 +65,7 @@ export const site = {
       it: 'Spigolatrice di Lambrate è una piccola realtà di affitti brevi gestita con cura da Pamela. Tre appartamenti, lo stesso quartiere vivo a due passi dalla metro, a dieci minuti dal Duomo.',
       en: 'Spigolatrice di Lambrate is a small short-stay rental gently hosted by Pamela. Three apartments, the same lively neighbourhood two minutes from the metro, ten minutes from the Duomo.',
     },
-    image: '/images/case/buschi/01.jpg',
+    image: '/images/case/grossich/12.jpg',
     cta: { it: 'Scopri le case', en: 'Discover the homes' },
   },
 
@@ -182,7 +182,7 @@ export const site = {
   // + mosaico di post-it scritti a mano lasciati dagli ospiti
   socialProof: {
     eyebrow: { it: 'Amati dagli ospiti', en: 'Guest favourites' },
-    title: { it: '292 recensioni, 3 case Guest Favorite', en: '292 reviews, 3 Guest Favorite homes' },
+    title: { it: '3 case, oltre 300 recensioni', en: '3 homes, over 300 reviews' },
     intro: {
       it: 'Le nostre tre case sono tra le più apprezzate di Airbnb a Milano. Quello che ci rende felici, però, sono i biglietti che gli ospiti lasciano sul muro.',
       en: 'Our three homes are among Airbnb\'s top-rated in Milan. What makes us happy, though, are the handwritten notes guests leave on the wall.',
@@ -392,8 +392,8 @@ export const site = {
       name: { it: 'Casa Buschi', en: 'Buschi Apartment' },
       address: 'Via Averardo Buschi, Milano',
       airbnbUrl: 'https://airbnb.com/h/spigolatrice1',
-      cardImage: '/images/case/buschi/01.jpg',
-      heroImage: '/images/case/buschi/02.jpg',
+      cardImage: '/images/case/buschi/13.jpg',
+      heroImage: '/images/case/buschi/13.jpg',
       tagline: {
         it: '70 mq spaziosi, due camere flessibili, fino a sette ospiti. Perfetta per gruppi e famiglie.',
         en: '70 sqm of space, two flexible bedrooms, sleeps up to seven. Perfect for groups and families.',
@@ -509,28 +509,41 @@ export const site = {
   },
 
   // ─── FAQ ─────────────────────────────────────────────────────
+  // Le FAQ con `highlight: true` vengono mostrate con uno stile più evidente
+  // (badge "Domanda frequente") e la prima è aperta di default.
   faq: {
     title: { it: 'Domande frequenti', en: 'Frequently asked questions' },
     items: [
       {
-        q: { it: 'Come funziona il check-in?', en: 'How does check-in work?' },
+        highlight: true,
+        q: { it: 'Il check-in è flessibile?', en: 'Is check-in flexible?' },
         a: {
-          it: 'Self check-in con istruzioni inviate per tempo. Pamela resta in contatto via WhatsApp per qualsiasi necessità, anche fuori dagli orari standard.',
-          en: 'Self check-in with instructions sent in advance. Pamela stays in touch on WhatsApp for anything you need, also outside standard hours.',
+          it: 'Sì. Facciamo self check-in con istruzioni inviate per tempo, quindi puoi arrivare quando ti è comodo, anche di notte o nel weekend. Pamela resta in contatto via WhatsApp per qualsiasi cosa.',
+          en: 'Yes. We do self check-in with instructions sent ahead of time, so you can arrive whenever suits you — late at night, on weekends. Pamela stays in touch on WhatsApp for anything you need.',
         },
       },
       {
-        q: { it: 'Dove si trovano gli appartamenti?', en: 'Where are the apartments?' },
+        highlight: true,
+        q: { it: 'Quanto è vicina la metropolitana?', en: 'How close is the metro?' },
         a: {
-          it: 'Tutte e tre le case sono nel quartiere universitario di Lambrate, Milano. A due minuti dalla metropolitana M2 e a dieci minuti da Piazza Duomo.',
-          en: "All three apartments are in Milan's Lambrate university district. Two minutes from the M2 metro and ten from Piazza Duomo.",
+          it: 'A due minuti a piedi. Le tre case sono a meno di 200 metri dalla fermata M2 Lambrate (linea verde) e dalla stazione FS di Lambrate. Da lì il Duomo è a 10 minuti, la Stazione Centrale a 10 minuti.',
+          en: 'Two minutes on foot. The three apartments are less than 200 m from the M2 Lambrate metro stop (green line) and the Lambrate railway station. From there it\'s 10 minutes to the Duomo and 10 minutes to Milano Centrale.',
         },
       },
       {
-        q: { it: 'C\'è il parcheggio?', en: 'Is there parking?' },
+        highlight: true,
+        q: { it: 'Come raggiungo gli aeroporti?', en: 'How do I get to the airports?' },
         a: {
-          it: 'In zona è facile parcheggiare gratuitamente sulla strada. In alternativa, sotto casa c\'è un parcheggio custodito a pagamento.',
-          en: 'Free street parking is easy to find in the area. Alternatively, there is a paid guarded car park downstairs.',
+          it: 'Linate in ~15 minuti con il bus diretto da piazza Bottini, a pochi passi da casa. Malpensa in ~50 minuti con il Malpensa Express dalla Stazione Centrale (10 minuti di metro da casa). Bergamo Orio in ~1h15 con bus diretto.',
+          en: 'Linate in ~15 minutes by direct bus from Piazza Bottini, steps from the apartments. Malpensa in ~50 minutes via the Malpensa Express from Milano Centrale (10 min by metro from home). Bergamo Orio in ~1h15 by direct bus.',
+        },
+      },
+      {
+        highlight: true,
+        q: { it: 'Accettate pagamenti in criptovalute?', en: 'Do you accept cryptocurrency payments?' },
+        a: {
+          it: 'Sì. Oltre ai metodi standard di Airbnb accettiamo anche Bitcoin e altre criptovalute su accordo diretto. Scrivici per concordare i dettagli prima della prenotazione.',
+          en: 'Yes. In addition to Airbnb\'s standard methods we also accept Bitcoin and other cryptocurrencies by direct arrangement. Get in touch to set things up before booking.',
         },
       },
       {
@@ -548,10 +561,38 @@ export const site = {
         },
       },
       {
-        q: { it: 'Accettate pagamenti in criptovalute?', en: 'Do you accept cryptocurrency payments?' },
+        q: { it: 'Sono adatte a famiglie con bambini?', en: 'Are the apartments family-friendly?' },
         a: {
-          it: 'Sì, oltre ai metodi standard di Airbnb accettiamo anche Bitcoin e altre criptovalute su accordo diretto. Scrivici per i dettagli.',
-          en: 'Yes — in addition to Airbnb\'s standard methods we also accept Bitcoin and other cryptocurrencies by direct arrangement. Get in touch for details.',
+          it: 'Sì, le case sono perfette per famiglie e gruppi. Buschi (fino a 7 ospiti) e Grossich (fino a 5) sono particolarmente comode per nuclei numerosi; Donegani è ideale per coppie e piccole famiglie. Su richiesta possiamo organizzare lettini o sedie per bambini.',
+          en: 'Yes, the apartments are great for families and groups. Buschi (up to 7) and Grossich (up to 5) work well for larger groups; Donegani is ideal for couples and small families. Cots or high-chairs on request.',
+        },
+      },
+      {
+        q: { it: 'C\'è il parcheggio?', en: 'Is there parking?' },
+        a: {
+          it: 'In zona è facile parcheggiare gratuitamente sulla strada. In alternativa, sotto casa c\'è un parcheggio custodito a pagamento. Considera che con metro e treno a 2 minuti l\'auto a Milano è raramente necessaria.',
+          en: 'Free street parking is easy to find in the area. Alternatively, there is a paid guarded car park downstairs. Note that with metro and rail 2 minutes away, you rarely need a car in Milan.',
+        },
+      },
+      {
+        q: { it: 'Sono ammessi animali domestici?', en: 'Are pets allowed?' },
+        a: {
+          it: 'Su richiesta, valutiamo caso per caso. Scrivici prima di prenotare specificando taglia e tipo di animale.',
+          en: 'On request, case by case. Please write to us before booking with details about the pet (size, type).',
+        },
+      },
+      {
+        q: { it: 'Sono previste pulizie durante il soggiorno?', en: 'Is there cleaning during the stay?' },
+        a: {
+          it: 'Le pulizie standard sono incluse a inizio e fine soggiorno. Per soggiorni lunghi possiamo organizzare pulizie intermedie su richiesta a un costo aggiuntivo.',
+          en: 'Standard cleaning is included at the beginning and end of the stay. For longer stays we can arrange mid-stay cleaning on request at an extra cost.',
+        },
+      },
+      {
+        q: { it: 'C\'è la tassa di soggiorno?', en: 'Is there a city tax?' },
+        a: {
+          it: 'Sì, come tutti gli alloggi a Milano. La tassa di soggiorno comunale si paga al check-in in contanti o tramite Airbnb, e dipende dalla categoria di alloggio (alcuni euro a persona, a notte, per un massimo di 14 notti).',
+          en: 'Yes, as for all accommodations in Milan. The city tax is paid at check-in (cash or via Airbnb), depending on accommodation category (a few euros per person, per night, capped at 14 nights).',
         },
       },
     ],

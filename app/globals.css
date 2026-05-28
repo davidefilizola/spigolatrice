@@ -33,21 +33,22 @@ html.dark {
   to { opacity: 1; }
 }
 
-/* Ken Burns — animazione zoom + pan per immagini hero (alternativa al video) */
+/* Ken Burns — animazione zoom + pan per immagini hero (alternativa al video).
+   Movimento marcato: scale 1.10→1.32, traslazione fino al ±5%, durata 16s. */
 @keyframes kenburns {
   0% {
-    transform: scale(1.05) translate3d(-2%, -1%, 0);
+    transform: scale(1.10) translate3d(-5%, -3%, 0);
   }
   50% {
-    transform: scale(1.18) translate3d(1%, 2%, 0);
+    transform: scale(1.32) translate3d(3%, 4%, 0);
   }
   100% {
-    transform: scale(1.10) translate3d(2%, -2%, 0);
+    transform: scale(1.18) translate3d(5%, -4%, 0);
   }
 }
 
 .kenburns {
-  animation: kenburns 22s ease-in-out infinite alternate;
+  animation: kenburns 16s ease-in-out infinite alternate;
   transform-origin: center center;
   will-change: transform;
 }

@@ -75,76 +75,78 @@ export default function SocialProof({ locale }: SocialProofProps) {
           ))}
         </motion.div>
 
-        {/* ─── Grid recensioni + post-it ─── */}
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
-          {/* Reviews */}
-          <motion.div variants={staggerItem} className="space-y-5">
-            {reviews.map(({ property, review }, i) => (
-              <article
-                key={i}
-                className="bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl p-5"
-              >
-                <div className="flex items-start justify-between mb-2">
-                  <div>
-                    <p className="font-medium text-stone-900 dark:text-stone-100">{review.author}</p>
-                    <p className="text-xs text-stone-500 dark:text-stone-400">
-                      {review.location ? `${review.location} · ` : ''}
-                      {review.date} · {t(property.name, locale)}
-                    </p>
+        {/* ─── Reviews ↔ Post-it allineati a coppie ───
+            Desktop (sm+): grid 2 col, ogni riga ha review (sinistra) + post-it (destra)
+            Mobile: stack — review, post-it, review, post-it...
+            Alterniamo lato: sul mobile evita doppio "blocco" review consecutivo.
+        */}
+        <motion.div variants={staggerItem} className="grid sm:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
+          {reviews.map(({ property, review }, i) => {
+            const postit = sp.postit[i % sp.postit.length]
+            return (
+              <div key={i} className="contents">
+                {/* Review card */}
+                <article className="bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl p-5 flex flex-col justify-center min-h-[180px] sm:min-h-[220px]">
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <p className="font-medium text-stone-900 dark:text-stone-100">{review.author}</p>
+                      <p className="text-xs text-stone-500 dark:text-stone-400">
+                        {review.location ? `${review.location} · ` : ''}
+                        {review.date} · {t(property.name, locale)}
+                      </p>
+                    </div>
+                    <span className="flex gap-0.5 shrink-0 mt-1" aria-label="5 stelle">
+                      {Array.from({ length: 5 }).map((_, j) => (
+                        <svg key={j} className="h-3.5 w-3.5 fill-amber-500" viewBox="0 0 20 20">
+                          <path d="M10 1.5l2.7 5.5 6 .9-4.3 4.2 1 6L10 15.3 4.6 18l1-6L1.3 7.9l6-.9z" />
+                        </svg>
+                      ))}
+                    </span>
                   </div>
-                  <span className="flex gap-0.5 shrink-0 mt-1" aria-label="5 stelle">
-                    {Array.from({ length: 5 }).map((_, j) => (
-                      <svg key={j} className="h-3.5 w-3.5 fill-amber-500" viewBox="0 0 20 20">
-                        <path d="M10 1.5l2.7 5.5 6 .9-4.3 4.2 1 6L10 15.3 4.6 18l1-6L1.3 7.9l6-.9z" />
-                      </svg>
-                    ))}
-                  </span>
+                  <p className="text-sm text-stone-700 dark:text-stone-300 leading-relaxed italic">
+                    &ldquo;{review.text}&rdquo;
+                  </p>
+                </article>
+
+                {/* Post-it accoppiato */}
+                <div className="flex items-center justify-center">
+                  <div
+                    className="relative w-full max-w-[280px] sm:max-w-none aspect-square rounded-xl overflow-hidden shadow-lg shadow-stone-900/10 dark:shadow-black/30 bg-stone-200 dark:bg-stone-800 border-4 border-white dark:border-stone-700"
+                    style={{ transform: `rotate(${postit.tilt}deg)` }}
+                  >
+                    <Image
+                      src={postit.src}
+                      alt={postit.alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 70vw, (max-width: 1024px) 45vw, 22vw"
+                    />
+                  </div>
                 </div>
-                <p className="text-sm text-stone-700 dark:text-stone-300 leading-relaxed italic">
-                  &ldquo;{review.text}&rdquo;
-                </p>
-              </article>
-            ))}
-
-            <div className="pt-2">
-              <a
-                href={site.social.airbnbHost}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-medium text-amber-700 dark:text-amber-500 hover:underline"
-              >
-                {t(sp.ctaLabel, locale)}
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </a>
-            </div>
-          </motion.div>
-
-          {/* Post-it scattered (rotated cards) */}
-          <motion.div variants={staggerItem} className="relative grid grid-cols-2 gap-4 sm:gap-5">
-            {sp.postit.map((p, i) => (
-              <div
-                key={i}
-                className="relative aspect-square rounded-xl overflow-hidden shadow-lg shadow-stone-900/10 dark:shadow-black/30 bg-stone-200 dark:bg-stone-800 border-4 border-white dark:border-stone-700"
-                style={{ transform: `rotate(${p.tilt}deg)` }}
-              >
-                <Image
-                  src={p.src}
-                  alt={p.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 45vw, 22vw"
-                />
               </div>
-            ))}
-            <p className="col-span-2 text-center text-xs text-stone-500 dark:text-stone-400 mt-2 italic">
-              {locale === 'it'
-                ? 'Alcuni biglietti lasciati dagli ospiti sul muro di casa.'
-                : 'Some of the notes guests have left on the apartment wall.'}
-            </p>
-          </motion.div>
-        </div>
+            )
+          })}
+        </motion.div>
+
+        {/* CTA centrale */}
+        <motion.div variants={staggerItem} className="mt-10 text-center">
+          <a
+            href={site.social.airbnbHost}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-medium text-amber-700 dark:text-amber-500 hover:underline"
+          >
+            {t(sp.ctaLabel, locale)}
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+          <p className="mt-4 text-xs text-stone-500 dark:text-stone-400 italic">
+            {locale === 'it'
+              ? 'Alcuni biglietti lasciati dagli ospiti sul muro di casa.'
+              : 'Some of the notes guests have left on the apartment wall.'}
+          </p>
+        </motion.div>
       </Container>
     </Section>
   )

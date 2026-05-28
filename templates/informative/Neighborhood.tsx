@@ -35,9 +35,9 @@ export default function Neighborhood({ locale }: NeighborhoodProps) {
   return (
     <Section id="quartiere" className="bg-stone-50 dark:bg-stone-950" stagger>
       <Container>
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-stretch">
           {/* ─── Sinistra: testo + features + CTA ─── */}
-          <motion.div variants={staggerItem}>
+          <motion.div variants={staggerItem} className="flex flex-col">
             <div className="flex items-center gap-3 mb-4">
               <span className="block h-px w-10 bg-amber-700 dark:bg-amber-500" />
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-amber-700 dark:text-amber-500">
@@ -51,7 +51,7 @@ export default function Neighborhood({ locale }: NeighborhoodProps) {
               {t(n.intro, locale)}
             </p>
 
-            <ul className="space-y-4">
+            <ul className="space-y-4 flex-1">
               {n.features.map((f, i) => (
                 <li key={i} className="flex gap-4">
                   <span className="text-2xl shrink-0 leading-none mt-0.5" aria-hidden="true">
@@ -82,9 +82,9 @@ export default function Neighborhood({ locale }: NeighborhoodProps) {
             </div>
           </motion.div>
 
-          {/* ─── Destra: bento gallery 5 foto ─── */}
-          <motion.div variants={staggerItem}>
-            <div className="grid grid-cols-3 grid-rows-3 gap-2 sm:gap-3 aspect-[3/4] sm:aspect-[4/5] lg:aspect-[3/4] rounded-2xl overflow-hidden">
+          {/* ─── Destra: bento gallery 5 foto + CTA "tutte" ─── */}
+          <motion.div variants={staggerItem} className="flex flex-col">
+            <div className="grid grid-cols-3 grid-rows-3 gap-2 sm:gap-3 aspect-[3/4] sm:aspect-square lg:aspect-auto lg:flex-1 rounded-2xl overflow-hidden">
               {preview.map((image, i) => {
                 // Layout bento personalizzato: img 0 grande (col-span-2 row-span-2), poi 4 piccole
                 const cls = [
@@ -113,11 +113,19 @@ export default function Neighborhood({ locale }: NeighborhoodProps) {
                 )
               })}
             </div>
-            <p className="mt-3 text-xs text-stone-500 dark:text-stone-400 text-center">
+
+            {/* CTA "vedi tutte le foto" — bottone esplicito */}
+            <button
+              onClick={() => setLightboxIndex(0)}
+              className="mt-5 inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-amber-700 dark:border-amber-500 text-amber-700 dark:text-amber-500 hover:bg-amber-700 hover:text-white dark:hover:bg-amber-500 dark:hover:text-stone-900 px-5 py-3 text-sm font-semibold transition-colors"
+            >
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h6v6H4zM14 6h6v6h-6zM4 16h6v4H4zM14 16h6v4h-6z" />
+              </svg>
               {locale === 'it'
-                ? `${n.gallery.length} foto del quartiere · clicca per vederle tutte`
-                : `${n.gallery.length} neighbourhood photos · tap to see them all`}
-            </p>
+                ? `Vedi tutte le ${n.gallery.length} foto del quartiere`
+                : `View all ${n.gallery.length} neighbourhood photos`}
+            </button>
           </motion.div>
         </div>
       </Container>
