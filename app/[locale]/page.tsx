@@ -2,9 +2,9 @@ import { isValidLocale, type Locale } from '@/core/lib/i18n'
 import { notFound } from 'next/navigation'
 import { site } from '@/content/site'
 import Hero from '@/templates/informative/Hero'
-import About from '@/templates/informative/About'
 import Properties from '@/templates/informative/Properties'
-import Gallery from '@/core/components/Gallery'
+import SocialProof from '@/templates/informative/SocialProof'
+import Neighborhood from '@/templates/informative/Neighborhood'
 import CTA from '@/core/components/CTA'
 import FAQ from '@/core/components/FAQ'
 import Contact from '@/core/components/Contact'
@@ -18,7 +18,6 @@ export default async function HomePage({
   if (!isValidLocale(locale)) notFound()
   const validLocale = locale as Locale
 
-  // JSON-LD: LocalBusiness + 3 LodgingBusiness inside
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
@@ -68,8 +67,8 @@ export default async function HomePage({
       />
       <Hero locale={validLocale} />
       <Properties locale={validLocale} />
-      <About locale={validLocale} />
-      <Gallery locale={validLocale} />
+      <SocialProof locale={validLocale} />
+      <Neighborhood locale={validLocale} />
       <CTA locale={validLocale} />
       <FAQ locale={validLocale} />
       <Contact locale={validLocale} />

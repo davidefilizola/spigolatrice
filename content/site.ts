@@ -47,7 +47,8 @@ export const site = {
   // ─── Navigazione ─────────────────────────────────────────────
   nav: [
     { href: '#case', label: { it: 'Le Case', en: 'Apartments' } },
-    { href: '#chi-siamo', label: { it: 'Chi siamo', en: 'About' } },
+    { href: '#chi-siamo', label: { it: 'Recensioni', en: 'Reviews' } },
+    { href: '/quartiere', label: { it: 'Quartiere', en: 'Neighbourhood' } },
     { href: '/galleria', label: { it: 'Galleria', en: 'Gallery' } },
     { href: '#faq', label: { it: 'FAQ', en: 'FAQ' } },
     { href: '#contatti', label: { it: 'Contatti', en: 'Contact' } },
@@ -87,7 +88,12 @@ export const site = {
 
   // ─── Quartiere (condiviso fra le 3 case) ─────────────────────
   neighborhood: {
-    title: { it: 'Lambrate, il quartiere', en: 'Lambrate, the district' },
+    eyebrow: { it: 'Lambrate · Milano', en: 'Lambrate · Milan' },
+    title: { it: 'Un quartiere vivo, sicuro e ben collegato', en: 'A lively, safe and well-connected neighbourhood' },
+    intro: {
+      it: 'Lambrate è il quartiere universitario di Milano: vivace ma silenzioso quando serve, sicuro a tutte le ore, pieno di servizi sotto casa e a due passi dai principali punti di interesse della città.',
+      en: 'Lambrate is the university district of Milan: lively but quiet when needed, safe at all hours, full of amenities on your doorstep and just steps from the city\'s main highlights.',
+    },
     body: [
       {
         it: 'Tutte e tre le case si trovano nel quartiere universitario di Lambrate, una delle aree più vivaci di Milano: sicuro, ben servito, pieno di negozi, supermercati, ristoranti, bar e farmacie. Il supermercato Carrefour sotto casa è aperto dalle 7 a mezzanotte.',
@@ -102,6 +108,99 @@ export const site = {
         en: 'A short walk away: Politecnico di Milano Leonardo Campus, Università Statale, CNR, East Market and Fuori Salone in Via Ventura, Istituto Nazionale dei Tumori, Istituto Neurologico Besta, Istituto Clinico Città Studi. You won\'t need a car — but if you have one, there\'s a guarded car park downstairs.',
       },
     ],
+    // Feature compatte mostrate in home (Neighborhood section)
+    features: [
+      {
+        icon: '🚇',
+        title: { it: 'Super collegato', en: 'Well connected' },
+        text: {
+          it: 'Metro M2 a 2 minuti, stazione FS Lambrate a 2 minuti, dieci minuti a Piazza Duomo e dieci alla Stazione Centrale.',
+          en: 'M2 metro 2 minutes away, Lambrate FS station 2 minutes, ten minutes to Piazza Duomo and ten to Milano Centrale.',
+        },
+      },
+      {
+        icon: '✈️',
+        title: { it: 'Tutti e tre gli aeroporti', en: 'All three airports' },
+        text: {
+          it: 'Linate in ~15 min con bus diretto, Malpensa in ~50 min col Malpensa Express, Bergamo Orio in ~1h15.',
+          en: 'Linate in ~15 min by direct bus, Malpensa in ~50 min via Malpensa Express, Bergamo Orio in ~1h15.',
+        },
+      },
+      {
+        icon: '🛒',
+        title: { it: 'Servizi sotto casa', en: 'Everything at your doorstep' },
+        text: {
+          it: 'Supermercato Carrefour aperto dalle 7 a mezzanotte, farmacie, negozi, bar e ristoranti a pochi passi.',
+          en: 'Carrefour supermarket open 7 a.m. to midnight, pharmacies, shops, bars and restaurants just steps away.',
+        },
+      },
+      {
+        icon: '🎓',
+        title: { it: 'Cuore universitario', en: 'University heart' },
+        text: {
+          it: 'A piedi raggiungi Politecnico Campus Leonardo, Università Statale Città Studi e il CNR.',
+          en: 'Walking distance to Politecnico Leonardo Campus, Università Statale Città Studi and the CNR.',
+        },
+      },
+      {
+        icon: '🌳',
+        title: { it: 'Vivace e tranquillo', en: 'Lively yet quiet' },
+        text: {
+          it: 'Aperitivi, design week (Fuori Salone di via Ventura), East Market: tutto qui. E case silenziose quando torni a dormire.',
+          en: 'Aperitivi, design week (Fuori Salone in Via Ventura), East Market: it all happens here. And homes that are quiet when you come back to sleep.',
+        },
+      },
+      {
+        icon: '🏥',
+        title: { it: 'Strutture sanitarie', en: 'Healthcare' },
+        text: {
+          it: 'A due passi dall\'Istituto Nazionale dei Tumori, Istituto Neurologico Besta e Istituto Clinico Città Studi.',
+          en: 'Steps away from Istituto Nazionale dei Tumori, Istituto Neurologico Besta and Istituto Clinico Città Studi.',
+        },
+      },
+    ],
+    // Gallery del quartiere: 6 foto locali (01-06) + 6 Wikimedia Commons (07-12).
+    // Le attribuzioni Wikimedia sono in public/images/quartiere/credits.json.
+    gallery: [
+      { src: '/images/quartiere/01.jpg', alt: 'Stazione Lambrate FS',                      width: 1280, height: 720, layout: 'full' as const, caption: { it: 'Stazione FS Lambrate, a 2 minuti dalle case', en: 'Lambrate FS station, 2 minutes from the apartments' } },
+      { src: '/images/quartiere/03.jpg', alt: 'Ingresso M2 Lambrate',                       width: 800,  height: 1200, layout: 'tall' as const, caption: { it: 'Ingresso metropolitana M2 Lambrate', en: 'M2 metro entrance, Lambrate' } },
+      { src: '/images/quartiere/07.jpg', alt: 'Politecnico di Milano · Campus Leonardo',    width: 1200, height: 900, layout: 'half' as const, caption: { it: 'Politecnico di Milano · Campus Leonardo', en: 'Politecnico di Milano · Leonardo Campus' } },
+      { src: '/images/quartiere/05.jpg', alt: 'Locale del quartiere con dehor',              width: 1200, height: 900, layout: 'half' as const, caption: { it: 'Locali e dehor a Lambrate', en: 'Bars and outdoor seating in Lambrate' } },
+      { src: '/images/quartiere/04.jpg', alt: 'Fermata bus Airport Express',                 width: 1200, height: 900, layout: 'half' as const, caption: { it: 'Bus diretto per Linate dalla porta di casa', en: 'Direct bus to Linate from the doorstep' } },
+      { src: '/images/quartiere/08.jpg', alt: 'Piazza Leonardo da Vinci',                    width: 1200, height: 900, layout: 'half' as const, caption: { it: 'Piazza Leonardo da Vinci', en: 'Piazza Leonardo da Vinci' } },
+      { src: '/images/quartiere/09.jpg', alt: 'Chiesa SS. Nome di Maria, Lambrate',          width: 800,  height: 1200, layout: 'tall' as const, caption: { it: 'Chiesa del SS. Nome di Maria, Lambrate', en: 'Church of the Holy Name of Mary, Lambrate' } },
+      { src: '/images/quartiere/06.jpg', alt: 'Strada di Lambrate',                          width: 1200, height: 900, layout: 'half' as const, caption: { it: 'Vita di quartiere', en: 'Neighbourhood life' } },
+      { src: '/images/quartiere/10.jpg', alt: 'Piazza Vigili del Fuoco',                     width: 1200, height: 900, layout: 'half' as const, caption: { it: 'Piazza Vigili del Fuoco', en: 'Piazza Vigili del Fuoco' } },
+      { src: '/images/quartiere/02.jpg', alt: 'Stazione Lambrate FS · frontale',             width: 1200, height: 900, layout: 'half' as const, caption: { it: 'Stazione FS Lambrate', en: 'Lambrate railway station' } },
+      { src: '/images/quartiere/11.jpg', alt: 'Edificio storico del Politecnico',            width: 1200, height: 900, layout: 'half' as const, caption: { it: 'Politecnico · edificio storico', en: 'Politecnico · historical building' } },
+      { src: '/images/quartiere/12.jpg', alt: 'Tram in centro Milano',                       width: 1200, height: 900, layout: 'half' as const, caption: { it: 'Tram per il centro', en: 'Tram to the centre' } },
+    ],
+  },
+
+  // ─── Social proof (recensioni + post-it) ─────────────────────
+  // Mostra rating aggregati delle 3 case + 4 recensioni hand-picked (varietà di lingue)
+  // + mosaico di post-it scritti a mano lasciati dagli ospiti
+  socialProof: {
+    eyebrow: { it: 'Amati dagli ospiti', en: 'Guest favourites' },
+    title: { it: '292 recensioni, 3 case Guest Favorite', en: '292 reviews, 3 Guest Favorite homes' },
+    intro: {
+      it: 'Le nostre tre case sono tra le più apprezzate di Airbnb a Milano. Quello che ci rende felici, però, sono i biglietti che gli ospiti lasciano sul muro.',
+      en: 'Our three homes are among Airbnb\'s top-rated in Milan. What makes us happy, though, are the handwritten notes guests leave on the wall.',
+    },
+    // Selezione: 4 recensioni mix di lingue (IT, EN, PT, DE)
+    featuredReviews: [
+      { property: 'donegani' as const, author: 'Arianna' },
+      { property: 'donegani' as const, author: 'Michelle' },
+      { property: 'grossich' as const, author: 'Luciene' },
+      { property: 'donegani' as const, author: 'Christiane' },
+    ],
+    postit: [
+      { src: '/images/postit/01.jpg', alt: 'Cuore Kinder, biglietto ospite',     tilt: -3 },
+      { src: '/images/postit/02.jpg', alt: 'Biglietto Veena & Venkat',           tilt: 2  },
+      { src: '/images/postit/03.jpg', alt: 'Biglietto Superhost',                tilt: -2 },
+      { src: '/images/postit/04.jpg', alt: 'Post-it Adriana',                     tilt: 4  },
+    ],
+    ctaLabel: { it: 'Leggi tutte le recensioni su Airbnb', en: 'Read all reviews on Airbnb' },
   },
 
   // ─── Le tre case ─────────────────────────────────────────────
