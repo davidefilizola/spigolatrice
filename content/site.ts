@@ -50,7 +50,7 @@ export const site = {
     { href: '#chi-siamo', label: { it: 'Recensioni', en: 'Reviews' } },
     { href: '/quartiere', label: { it: 'Quartiere', en: 'Neighbourhood' } },
     { href: '/galleria', label: { it: 'Galleria', en: 'Gallery' } },
-    { href: '#faq', label: { it: 'FAQ', en: 'FAQ' } },
+    { href: '/faq', label: { it: 'FAQ', en: 'FAQ' } },
     { href: '#contatti', label: { it: 'Contatti', en: 'Contact' } },
   ],
 
@@ -66,7 +66,7 @@ export const site = {
       en: 'Spigolatrice di Lambrate is a small short-stay rental gently hosted by Pamela. Three apartments, the same lively neighbourhood two minutes from the metro, ten minutes from the Duomo.',
     },
     image: '/images/case/grossich/12.jpg',
-    cta: { it: 'Scopri le case', en: 'Discover the homes' },
+    cta: { it: 'Contattaci', en: 'Contact us' },
   },
 
   // ─── About ───────────────────────────────────────────────────
@@ -509,13 +509,11 @@ export const site = {
   },
 
   // ─── FAQ ─────────────────────────────────────────────────────
-  // Le FAQ con `highlight: true` vengono mostrate con uno stile più evidente
-  // (badge "Domanda frequente") e la prima è aperta di default.
+  // In home vengono mostrate solo le prime 4. Per l'elenco completo c'è /faq.
   faq: {
     title: { it: 'Domande frequenti', en: 'Frequently asked questions' },
     items: [
       {
-        highlight: true,
         q: { it: 'Il check-in è flessibile?', en: 'Is check-in flexible?' },
         a: {
           it: 'Sì. Facciamo self check-in con istruzioni inviate per tempo, quindi puoi arrivare quando ti è comodo, anche di notte o nel weekend. Pamela resta in contatto via WhatsApp per qualsiasi cosa.',
@@ -523,7 +521,6 @@ export const site = {
         },
       },
       {
-        highlight: true,
         q: { it: 'Quanto è vicina la metropolitana?', en: 'How close is the metro?' },
         a: {
           it: 'A due minuti a piedi. Le tre case sono a meno di 200 metri dalla fermata M2 Lambrate (linea verde) e dalla stazione FS di Lambrate. Da lì il Duomo è a 10 minuti, la Stazione Centrale a 10 minuti.',
@@ -531,7 +528,6 @@ export const site = {
         },
       },
       {
-        highlight: true,
         q: { it: 'Come raggiungo gli aeroporti?', en: 'How do I get to the airports?' },
         a: {
           it: 'Linate in ~15 minuti con il bus diretto da piazza Bottini, a pochi passi da casa. Malpensa in ~50 minuti con il Malpensa Express dalla Stazione Centrale (10 minuti di metro da casa). Bergamo Orio in ~1h15 con bus diretto.',
@@ -539,7 +535,6 @@ export const site = {
         },
       },
       {
-        highlight: true,
         q: { it: 'Accettate pagamenti in criptovalute?', en: 'Do you accept cryptocurrency payments?' },
         a: {
           it: 'Sì. Oltre ai metodi standard di Airbnb accettiamo anche Bitcoin e altre criptovalute su accordo diretto. Scrivici per concordare i dettagli prima della prenotazione.',
@@ -586,13 +581,6 @@ export const site = {
         a: {
           it: 'Le pulizie standard sono incluse a inizio e fine soggiorno. Per soggiorni lunghi possiamo organizzare pulizie intermedie su richiesta a un costo aggiuntivo.',
           en: 'Standard cleaning is included at the beginning and end of the stay. For longer stays we can arrange mid-stay cleaning on request at an extra cost.',
-        },
-      },
-      {
-        q: { it: 'C\'è la tassa di soggiorno?', en: 'Is there a city tax?' },
-        a: {
-          it: 'Sì, come tutti gli alloggi a Milano. La tassa di soggiorno comunale si paga al check-in in contanti o tramite Airbnb, e dipende dalla categoria di alloggio (alcuni euro a persona, a notte, per un massimo di 14 notti).',
-          en: 'Yes, as for all accommodations in Milan. The city tax is paid at check-in (cash or via Airbnb), depending on accommodation category (a few euros per person, per night, capped at 14 nights).',
         },
       },
     ],

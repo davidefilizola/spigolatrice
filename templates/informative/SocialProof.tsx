@@ -75,58 +75,61 @@ export default function SocialProof({ locale }: SocialProofProps) {
           ))}
         </motion.div>
 
-        {/* ─── Reviews ↔ Post-it allineati a coppie ───
-            Desktop (sm+): grid 2 col, ogni riga ha review (sinistra) + post-it (destra)
-            Mobile: stack — review, post-it, review, post-it...
-            Alterniamo lato: sul mobile evita doppio "blocco" review consecutivo.
-        */}
-        <motion.div variants={staggerItem} className="grid sm:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
-          {reviews.map(({ property, review }, i) => {
-            const postit = sp.postit[i % sp.postit.length]
-            return (
-              <div key={i} className="contents">
-                {/* Review card */}
-                <article className="bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl p-5 flex flex-col justify-center min-h-[180px] sm:min-h-[220px]">
-                  <div className="flex items-start justify-between mb-2">
-                    <div>
-                      <p className="font-medium text-stone-900 dark:text-stone-100">{review.author}</p>
-                      <p className="text-xs text-stone-500 dark:text-stone-400">
-                        {review.location ? `${review.location} · ` : ''}
-                        {review.date} · {t(property.name, locale)}
-                      </p>
-                    </div>
-                    <span className="flex gap-0.5 shrink-0 mt-1" aria-label="5 stelle">
-                      {Array.from({ length: 5 }).map((_, j) => (
-                        <svg key={j} className="h-3.5 w-3.5 fill-amber-500" viewBox="0 0 20 20">
-                          <path d="M10 1.5l2.7 5.5 6 .9-4.3 4.2 1 6L10 15.3 4.6 18l1-6L1.3 7.9l6-.9z" />
-                        </svg>
-                      ))}
-                    </span>
+        {/* ─── Layout 2 colonne: reviews verticali a sinistra, post-it 2×2 a destra.
+            items-stretch + flex flex-col justify-between sulla colonna reviews fa
+            sì che la prima e l'ultima review combacino con il bordo superiore e
+            inferiore delle foto post-it. */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+          {/* Reviews — flex column stirata, distribuita uniformemente */}
+          <motion.div variants={staggerItem} className="flex flex-col gap-4 lg:gap-5">
+            {reviews.map(({ property, review }, i) => (
+              <article
+                key={i}
+                className="flex-1 bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl p-5 flex flex-col"
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <div>
+                    <p className="font-medium text-stone-900 dark:text-stone-100">{review.author}</p>
+                    <p className="text-xs text-stone-500 dark:text-stone-400">
+                      {review.location ? `${review.location} · ` : ''}
+                      {review.date} · {t(property.name, locale)}
+                    </p>
                   </div>
-                  <p className="text-sm text-stone-700 dark:text-stone-300 leading-relaxed italic">
-                    &ldquo;{review.text}&rdquo;
-                  </p>
-                </article>
+                  <span className="flex gap-0.5 shrink-0 mt-1" aria-label="5 stelle">
+                    {Array.from({ length: 5 }).map((_, j) => (
+                      <svg key={j} className="h-3.5 w-3.5 fill-amber-500" viewBox="0 0 20 20">
+                        <path d="M10 1.5l2.7 5.5 6 .9-4.3 4.2 1 6L10 15.3 4.6 18l1-6L1.3 7.9l6-.9z" />
+                      </svg>
+                    ))}
+                  </span>
+                </div>
+                <p className="text-sm text-stone-700 dark:text-stone-300 leading-relaxed italic">
+                  &ldquo;{review.text}&rdquo;
+                </p>
+              </article>
+            ))}
+          </motion.div>
 
-                {/* Post-it accoppiato */}
-                <div className="flex items-center justify-center">
-                  <div
-                    className="relative w-full max-w-[280px] sm:max-w-none aspect-square rounded-xl overflow-hidden shadow-lg shadow-stone-900/10 dark:shadow-black/30 bg-stone-200 dark:bg-stone-800 border-4 border-white dark:border-stone-700"
-                    style={{ transform: `rotate(${postit.tilt}deg)` }}
-                  >
-                    <Image
-                      src={postit.src}
-                      alt={postit.alt}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 640px) 70vw, (max-width: 1024px) 45vw, 22vw"
-                    />
-                  </div>
+          {/* Post-it — grid 2×2, ogni cella square, occupano tutta l'altezza del parent */}
+          <motion.div variants={staggerItem} className="grid grid-cols-2 grid-rows-2 gap-4 lg:gap-5">
+            {sp.postit.map((p, i) => (
+              <div key={i} className="flex items-center justify-center">
+                <div
+                  className="relative w-full aspect-square rounded-xl overflow-hidden shadow-lg shadow-stone-900/10 dark:shadow-black/30 bg-stone-200 dark:bg-stone-800 border-4 border-white dark:border-stone-700"
+                  style={{ transform: `rotate(${p.tilt}deg)` }}
+                >
+                  <Image
+                    src={p.src}
+                    alt={p.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 22vw"
+                  />
                 </div>
               </div>
-            )
-          })}
-        </motion.div>
+            ))}
+          </motion.div>
+        </div>
 
         {/* CTA centrale */}
         <motion.div variants={staggerItem} className="mt-10 text-center">

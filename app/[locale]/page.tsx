@@ -70,7 +70,7 @@ export default async function HomePage({
       <SocialProof locale={validLocale} />
       <Neighborhood locale={validLocale} />
       <CTA locale={validLocale} />
-      <FAQ locale={validLocale} />
+      <FAQ locale={validLocale} limit={4} />
       <Contact locale={validLocale} />
     </>
   )
