@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Fraunces } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
+import { Analytics } from '@vercel/analytics/next'
 import PWARegister from '@/core/components/PWARegister'
 import { site } from '@/content/site'
 import './globals.css'
@@ -52,6 +53,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <PWARegister />
         </ThemeProvider>
+        {/* Vercel Analytics: attivo solo in production su Vercel.
+            In locale è no-op. Niente cookie banner richiesto (GDPR-safe). */}
+        <Analytics />
       </body>
     </html>
   )

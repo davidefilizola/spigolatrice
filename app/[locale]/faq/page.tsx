@@ -42,8 +42,23 @@ export default async function FaqPage({
   if (!isValidLocale(locale)) notFound()
   const validLocale = locale as Locale
 
+  // JSON-LD FAQPage: tutte le FAQ → ricche citazioni nei risultati Google
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: site.faq.items.map((item) => ({
+      '@type': 'Question',
+      name: t(item.q, validLocale),
+      acceptedAnswer: { '@type': 'Answer', text: t(item.a, validLocale) },
+    })),
+  }
+
   return (
     <div className="pt-28 sm:pt-32">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Container>
         <header className="max-w-2xl mb-8">
           <div className="flex items-center gap-3 mb-4">

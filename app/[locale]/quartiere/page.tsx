@@ -149,8 +149,27 @@ export default async function QuartierePage({
   const n = site.neighborhood
   const heroImage = n.gallery[0]
 
+  // JSON-LD: Place + TouristAttraction per la zona Lambrate
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Place',
+    name: 'Lambrate, Milano',
+    description: t(n.intro, validLocale),
+    address: { '@type': 'PostalAddress', addressLocality: 'Milano', addressRegion: 'Lombardia', addressCountry: 'IT' },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: site.contact.coordinates.lat,
+      longitude: site.contact.coordinates.lng,
+    },
+    isAccessibleForFree: true,
+    publicAccess: true,
+    photo: n.gallery.slice(0, 6).map((g) => `${site.url}${g.src}`),
+    containedInPlace: { '@type': 'City', name: 'Milano' },
+  }
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* ─── HERO compatto ─── */}
       <section className="relative h-[50vh] sm:h-[60vh] min-h-[380px] flex items-end overflow-hidden">
         <div className="absolute inset-0">

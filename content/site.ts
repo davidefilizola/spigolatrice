@@ -540,6 +540,10 @@ export const site = {
           it: 'Sì. Oltre ai metodi standard di Airbnb accettiamo anche Bitcoin e altre criptovalute su accordo diretto. Scrivici per concordare i dettagli prima della prenotazione.',
           en: 'Yes. In addition to Airbnb\'s standard methods we also accept Bitcoin and other cryptocurrencies by direct arrangement. Get in touch to set things up before booking.',
         },
+        link: {
+          href: '/cripto',
+          label: { it: 'Scopri di più sui pagamenti in cripto', en: 'Learn more about crypto payments' },
+        },
       },
       {
         q: { it: 'Quanti ospiti possono soggiornare?', en: 'How many guests can stay?' },

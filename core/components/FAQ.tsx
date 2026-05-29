@@ -48,9 +48,20 @@ export default function FAQ({ locale, limit }: FAQProps) {
                   style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
                 >
                   <div className="overflow-hidden">
-                    <p className="pb-5 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                    <p className="pb-3 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
                       {t(item.a, locale)}
                     </p>
+                    {'link' in item && item.link && (
+                      <Link
+                        href={`/${locale}${item.link.href}`}
+                        className="inline-flex items-center gap-1.5 pb-5 text-sm font-medium text-amber-700 dark:text-amber-500 hover:underline"
+                      >
+                        {t(item.link.label, locale)}
+                        <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
