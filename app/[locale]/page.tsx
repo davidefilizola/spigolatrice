@@ -38,11 +38,13 @@ export default async function HomePage({
     },
     image: `${site.url}${site.seo.ogImage}`,
     sameAs: [site.social.instagram, site.social.facebook, site.social.airbnbHost].filter(Boolean),
+    priceRange: '€80–€200',
     department: site.properties.map((p) => ({
       '@type': 'LodgingBusiness',
       name: `${p.name.it} · ${site.name}`,
       url: `${site.url}/${validLocale}/case/${p.slug}`,
       image: `${site.url}${p.heroImage}`,
+      priceRange: '€80–€200',
       address: {
         '@type': 'PostalAddress',
         streetAddress: p.address,

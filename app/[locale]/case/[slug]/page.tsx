@@ -67,6 +67,7 @@ export default async function CasePage({
     '@type': 'LodgingBusiness',
     name: `${t(property.name, validLocale)} · ${site.name}`,
     image: `${site.url}${property.heroImage}`,
+    priceRange: '€80–€200',
     address: { '@type': 'PostalAddress', streetAddress: property.address, addressLocality: 'Milano', addressCountry: 'IT' },
     aggregateRating: {
       '@type': 'AggregateRating',

@@ -187,6 +187,7 @@ export default async function CriptoPage({
       '@type': 'LodgingBusiness',
       name: site.name,
       url: `${site.url}/${validLocale}/cripto`,
+      priceRange: '€80–€200',
       paymentAccepted: ['Bitcoin', 'Ethereum', 'USDC', 'USDT', 'Cryptocurrency', 'Credit Card', 'Cash', 'Airbnb'],
       address: {
         '@type': 'PostalAddress',
