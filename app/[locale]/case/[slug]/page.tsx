@@ -68,7 +68,7 @@ export default async function CasePage({
     name: `${t(property.name, validLocale)} · ${site.name}`,
     image: `${site.url}${property.heroImage}`,
     priceRange: '€80–€200',
-    address: { '@type': 'PostalAddress', streetAddress: property.address, addressLocality: 'Milano', addressCountry: 'IT' },
+    address: { '@type': 'PostalAddress', streetAddress: property.address, postalCode: property.postalCode, addressLocality: 'Milano', addressRegion: 'Lombardia', addressCountry: 'IT' },
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: property.ratings.overall,

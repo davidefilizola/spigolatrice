@@ -192,7 +192,9 @@ export default async function CriptoPage({
       address: {
         '@type': 'PostalAddress',
         streetAddress: site.contact.address,
+        postalCode: site.contact.postalCode,
         addressLocality: 'Milano',
+        addressRegion: 'Lombardia',
         addressCountry: 'IT',
       },
     },

@@ -28,7 +28,9 @@ export default async function HomePage({
     address: {
       '@type': 'PostalAddress',
       streetAddress: site.contact.address,
+      postalCode: site.contact.postalCode,
       addressLocality: 'Milano',
+      addressRegion: 'Lombardia',
       addressCountry: 'IT',
     },
     geo: {
@@ -48,7 +50,9 @@ export default async function HomePage({
       address: {
         '@type': 'PostalAddress',
         streetAddress: p.address,
+        postalCode: p.postalCode,
         addressLocality: 'Milano',
+        addressRegion: 'Lombardia',
         addressCountry: 'IT',
       },
       aggregateRating: {
