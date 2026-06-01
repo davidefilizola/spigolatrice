@@ -38,7 +38,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(`/${locale}/cripto`, request.url), 301)
   }
 
-  // 3) Redirect alla locale se manca
+  // 3) Redirect alla locale se manca — 308 permanent per chiarezza SEO
   const hasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   )
@@ -46,7 +46,7 @@ export function middleware(request: NextRequest) {
     const acceptLanguage = request.headers.get('accept-language') ?? ''
     const preferred = acceptLanguage.split(',')[0].split('-')[0].toLowerCase()
     const locale = locales.includes(preferred) ? preferred : defaultLocale
-    return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url))
+    return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url), 308)
   }
 }
 
