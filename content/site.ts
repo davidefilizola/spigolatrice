@@ -66,7 +66,7 @@ export const site = {
       it: 'Spigolatrice di Lambrate è una piccola realtà di affitti brevi gestita con cura da Pamela. Tre appartamenti, lo stesso quartiere vivo a due passi dalla metro, a dieci minuti dal Duomo.',
       en: 'Spigolatrice di Lambrate is a small short-stay rental gently hosted by Pamela. Three apartments, the same lively neighbourhood two minutes from the metro, ten minutes from the Duomo.',
     },
-    image: '/images/case/grossich/12.jpg',
+    image: '/images/case/donegani/28.jpg',
     cta: { it: 'Contattaci', en: 'Contact us' },
   },
 
