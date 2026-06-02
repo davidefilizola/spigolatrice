@@ -27,10 +27,10 @@ export const metadata: Metadata = {
     title: site.name,
     statusBarStyle: 'default',
   },
-  // PWA: collega apple touch icon
-  icons: {
-    apple: '/icons/apple-touch-icon.png',
-  },
+  // NB: niente `icons` qui — Next.js rileva automaticamente
+  // app/icon.png e app/apple-icon.png via file convention, e
+  // dichiarare manualmente `icons.apple` sovrascriveva l'auto-detection
+  // facendo sparire il favicon dalla tab.
 }
 
 export const viewport: Viewport = {
