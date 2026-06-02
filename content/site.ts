@@ -164,6 +164,7 @@ export const site = {
     // Le attribuzioni Wikimedia sono in public/images/quartiere/credits.json.
     gallery: [
       { src: '/images/quartiere/01.jpg', alt: 'Stazione Lambrate FS',                      width: 1280, height: 720, layout: 'full' as const, caption: { it: 'Stazione FS Lambrate, a 2 minuti dalle case', en: 'Lambrate FS station, 2 minutes from the apartments' } },
+      { src: '/images/quartiere/13.jpg', alt: 'Piazza Leonardo da Vinci · Politecnico di Milano', width: 1280, height: 960, layout: 'full' as const, caption: { it: 'Piazza Leonardo da Vinci · Politecnico di Milano', en: 'Piazza Leonardo da Vinci · Politecnico di Milano' } },
       { src: '/images/quartiere/03.jpg', alt: 'Ingresso M2 Lambrate',                       width: 800,  height: 1200, layout: 'tall' as const, caption: { it: 'Ingresso metropolitana M2 Lambrate', en: 'M2 metro entrance, Lambrate' } },
       { src: '/images/quartiere/07.jpg', alt: 'Politecnico di Milano · Campus Leonardo',    width: 1200, height: 900, layout: 'half' as const, caption: { it: 'Politecnico di Milano · Campus Leonardo', en: 'Politecnico di Milano · Leonardo Campus' } },
       { src: '/images/quartiere/05.jpg', alt: 'Locale del quartiere con dehor',              width: 1200, height: 900, layout: 'half' as const, caption: { it: 'Locali e dehor a Lambrate', en: 'Bars and outdoor seating in Lambrate' } },
