@@ -90,7 +90,15 @@ export default function Footer({ locale }: FooterProps) {
         </div>
 
         <p className="mt-12 text-xs text-stone-400 dark:text-stone-600">
-          © {new Date().getFullYear()} {site.name}. {t(site.footer.rights, locale)}.
+          © {new Date().getFullYear()} {site.name}. {t(site.footer.rights, locale)}.{' '}
+          <a
+            href="https://webdesign.spigolatricedilambrate.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-stone-700 dark:hover:text-stone-300 underline-offset-2 hover:underline transition-colors"
+          >
+            {locale === 'en' ? 'Site by Studio Web ↗' : 'Sito realizzato da Studio Web ↗'}
+          </a>
         </p>
       </Container>
     </footer>
