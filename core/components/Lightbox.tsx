@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { t, type Locale } from '@/core/lib/i18n'
 import { useModalA11y } from '@/core/lib/useModalA11y'
@@ -35,6 +35,10 @@ export default function Lightbox({
 }: LightboxProps) {
   const [active, setActive] = useState(initialIndex)
   const trackRef = useRef<HTMLDivElement>(null)
+  // true quando il cambio di `active` arriva dallo swipe del track: evita che il
+  // layout effect rimetta a posto lo scroll creando un loop scroll↔stato (che su
+  // mobile faceva atterrare sulla foto sbagliata).
+  const fromScroll = useRef(false)
   // Comportamenti standard del modal (scroll lock, focus trap, focus restore,
   // Esc e tasto "indietro" del telefono per chiudere) — vedi useModalA11y.
   const dialogRef = useModalA11y<HTMLDivElement>(true, onClose, { backButton: true })
@@ -59,21 +63,43 @@ export default function Lightbox({
     return () => window.removeEventListener('keydown', onKey)
   }, [total])
 
-  // Posiziona il track mobile: apertura + cambi da frecce/tastiera. Niente loop:
-  // dopo lo scroll l'indice derivato coincide con `active`.
-  useEffect(() => {
+  // Posiziona il track mobile sulla foto corrente. Assegnazione DIRETTA di
+  // scrollLeft (istantanea: niente animazione né eventi di scroll intermedi come
+  // farebbe scrollTo) dentro un layout effect (prima del paint: niente flash).
+  // Così l'apertura atterra sempre sulla foto giusta, anche su iOS. Salta quando
+  // il cambio di `active` arriva dallo swipe, per non rimettere mano allo scroll.
+  useLayoutEffect(() => {
+    if (fromScroll.current) {
+      fromScroll.current = false
+      return
+    }
     const el = trackRef.current
-    if (!el || el.clientWidth === 0) return
-    const derived = Math.round(el.scrollLeft / el.clientWidth)
-    if (derived !== active) el.scrollTo({ left: active * el.clientWidth })
+    if (!el || !el.clientWidth) return
+    el.scrollLeft = active * el.clientWidth
   }, [active])
 
-  // Aggiorna l'indice durante lo swipe (mobile) — solo stato locale → fluido
+  // Difesa iOS: a volte Safari, con lo scroll-snap, riallinea lo scroll al primo
+  // paint dopo il mount. Ri-asserisco la posizione iniziale una volta (solo se è
+  // derivata, così non combatto con lo swipe dell'utente).
+  useEffect(() => {
+    const el = trackRef.current
+    if (!el || !el.clientWidth) return
+    const target = initialIndex * el.clientWidth
+    if (Math.abs(el.scrollLeft - target) > 1) el.scrollLeft = target
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // Swipe mobile → aggiorna solo l'indice (una direzione: scroll → stato).
+  // Marca il cambio come "dallo scroll" così il layout effect qui sopra non
+  // rimette a posto lo scroll (niente loop, niente salti all'indice sbagliato).
   const onTrackScroll = () => {
     const el = trackRef.current
-    if (!el || el.clientWidth === 0) return
+    if (!el || !el.clientWidth) return
     const i = Math.round(el.scrollLeft / el.clientWidth)
-    if (i !== active) setActive(i)
+    if (i !== active) {
+      fromScroll.current = true
+      setActive(i)
+    }
   }
 
   // Precarica le immagini adiacenti per evitare flash durante lo swipe
