@@ -3,6 +3,7 @@ import { Geist, Fraunces } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
 import { Analytics } from '@vercel/analytics/next'
 import PWARegister from '@/core/components/PWARegister'
+import MotionProvider from '@/core/components/MotionProvider'
 import { site } from '@/content/site'
 import './globals.css'
 
@@ -50,8 +51,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-          <PWARegister />
+          <MotionProvider>
+            {children}
+            <PWARegister />
+          </MotionProvider>
         </ThemeProvider>
         {/* Vercel Analytics: attivo solo in production su Vercel.
             In locale è no-op. Niente cookie banner richiesto (GDPR-safe). */}

@@ -64,10 +64,9 @@ export default function PropertyGallery({ images, locale }: Props) {
       {lightboxIndex !== null && (
         <Lightbox
           images={mutable}
-          index={lightboxIndex}
+          initialIndex={lightboxIndex}
           locale={locale}
           onClose={() => setLightboxIndex(null)}
-          onNavigate={setLightboxIndex}
         />
       )}
     </>

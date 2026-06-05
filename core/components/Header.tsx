@@ -7,6 +7,7 @@ import { useTheme } from 'next-themes'
 import Container from '@/core/components/Container'
 import { site } from '@/content/site'
 import { t, type Locale } from '@/core/lib/i18n'
+import { useModalA11y } from '@/core/lib/useModalA11y'
 
 interface HeaderProps {
   locale: Locale
@@ -19,6 +20,9 @@ export default function Header({ locale }: HeaderProps) {
   const { resolvedTheme, setTheme } = useTheme()
   const pathname = usePathname()
   const otherLocale: Locale = locale === 'it' ? 'en' : 'it'
+  // Path corrente senza il prefisso del locale, così il cambio lingua resta
+  // sulla stessa pagina (es. /it/galleria → /en/galleria).
+  const pathWithoutLocale = pathname.replace(/^\/(it|en)(?=\/|$)/, '')
 
   // Trasparente sopra hero, opaco quando scrollato — solo in HP.
   // In altre pagine (es. /galleria) il header è sempre opaco.
@@ -35,18 +39,6 @@ export default function Header({ locale }: HeaderProps) {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [isHomePage])
-
-  // Blocca scroll del body quando menu mobile è aperto
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [menuOpen])
 
   // Click sul logo: se siamo già su HP scrolla in cima; altrimenti naviga.
   const handleLogoClick = (e: React.MouseEvent) => {
@@ -111,8 +103,8 @@ export default function Header({ locale }: HeaderProps) {
 
             <div className="flex items-center gap-1">
               <Link
-                href={`/${otherLocale}`}
-                className={`px-2 text-xs font-semibold uppercase tracking-widest transition-colors duration-200 ${linkColor}`}
+                href={`/${otherLocale}${pathWithoutLocale}`}
+                className={`inline-flex h-11 min-w-11 items-center justify-center px-2 text-xs font-semibold uppercase tracking-widest transition-colors duration-200 ${linkColor}`}
               >
                 {otherLocale}
               </Link>
@@ -120,7 +112,7 @@ export default function Header({ locale }: HeaderProps) {
               {mounted && (
                 <button
                   onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-                  className={`rounded-full p-2 transition-colors duration-200 ${linkColor} ${
+                  className={`flex h-11 w-11 items-center justify-center rounded-full transition-colors duration-200 ${linkColor} ${
                     scrolled ? 'hover:bg-stone-100 dark:hover:bg-stone-800' : 'hover:bg-white/10'
                   }`}
                   aria-label={t(
@@ -133,9 +125,9 @@ export default function Header({ locale }: HeaderProps) {
               )}
 
               <button
-                className={`md:hidden rounded p-2 transition-colors ${linkColor}`}
+                className={`md:hidden flex h-11 w-11 items-center justify-center rounded transition-colors ${linkColor}`}
                 onClick={() => setMenuOpen(true)}
-                aria-label="Apri menu"
+                aria-label={locale === 'it' ? 'Apri menu' : 'Open menu'}
                 aria-expanded={menuOpen}
               >
                 <HamburgerIcon />
@@ -150,6 +142,7 @@ export default function Header({ locale }: HeaderProps) {
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
         locale={locale}
+        pathWithoutLocale={pathWithoutLocale}
       />
     </>
   )
@@ -160,19 +153,27 @@ function MobileMenu({
   open,
   onClose,
   locale,
+  pathWithoutLocale,
 }: {
   open: boolean
   onClose: () => void
   locale: Locale
+  pathWithoutLocale: string
 }) {
+  // Scroll lock + focus trap + focus restore + Esc per chiudere (vedi hook).
+  const menuRef = useModalA11y<HTMLDivElement>(open, onClose)
   return (
     <div
+      ref={menuRef}
+      // `inert` quando chiuso: toglie i link dall'ordine di tabulazione e
+      // dall'albero di accessibilità (altrimenti sarebbero raggiungibili col Tab
+      // pur essendo invisibili).
+      inert={!open}
       className={`fixed inset-0 z-[60] md:hidden transition-opacity duration-300 ${
         open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}
       role="dialog"
       aria-modal="true"
-      aria-hidden={!open}
     >
       {/* Backdrop */}
       <div
@@ -205,8 +206,8 @@ function MobileMenu({
           </span>
           <button
             onClick={onClose}
-            className="rounded-full p-2 text-stone-600 hover:bg-stone-100 dark:text-stone-400 dark:hover:bg-stone-800"
-            aria-label="Chiudi menu"
+            className="flex h-11 w-11 items-center justify-center rounded-full text-stone-600 hover:bg-stone-100 dark:text-stone-400 dark:hover:bg-stone-800"
+            aria-label={locale === 'it' ? 'Chiudi menu' : 'Close menu'}
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -252,7 +253,7 @@ function MobileMenu({
           <div className="flex items-center justify-between pt-3 border-t border-stone-200/70 dark:border-stone-800/70">
             <div className="flex gap-2 text-xs font-semibold uppercase tracking-widest">
               <Link
-                href={`/it${pathnameWithoutLocale(locale)}`}
+                href={`/it${pathWithoutLocale}`}
                 onClick={onClose}
                 className={
                   locale === 'it'
@@ -264,7 +265,7 @@ function MobileMenu({
               </Link>
               <span className="text-stone-300 dark:text-stone-700">·</span>
               <Link
-                href={`/en${pathnameWithoutLocale(locale)}`}
+                href={`/en${pathWithoutLocale}`}
                 onClick={onClose}
                 className={
                   locale === 'en'
@@ -280,13 +281,6 @@ function MobileMenu({
       </div>
     </div>
   )
-}
-
-// helper banale — il path corrente senza il locale
-// (qui non lo usiamo davvero perché non abbiamo accesso al pathname in questo scope;
-// è un placeholder che semplicemente preserva la root)
-function pathnameWithoutLocale(_locale: Locale): string {
-  return ''
 }
 
 function SunIcon() {

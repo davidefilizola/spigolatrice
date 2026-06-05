@@ -55,10 +55,9 @@ export default function Gallery({ locale }: GalleryProps) {
       {lightboxIndex !== null && (
         <Lightbox
           images={[...site.gallery.images]}
-          index={lightboxIndex}
+          initialIndex={lightboxIndex}
           locale={locale}
           onClose={() => setLightboxIndex(null)}
-          onNavigate={setLightboxIndex}
         />
       )}
     </Section>

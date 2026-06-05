@@ -3,6 +3,7 @@ import { buildMetadata } from '@/core/lib/metadata'
 import { notFound } from 'next/navigation'
 import Header from '@/core/components/Header'
 import Footer from '@/core/components/Footer'
+import HtmlLang from '@/core/components/HtmlLang'
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -31,6 +32,7 @@ export default async function LocaleLayout({
 
   return (
     <>
+      <HtmlLang locale={validLocale} />
       <Header locale={validLocale} />
       <main>{children}</main>
       <Footer locale={validLocale} />

@@ -133,10 +133,9 @@ export default function Neighborhood({ locale }: NeighborhoodProps) {
       {lightboxIndex !== null && (
         <Lightbox
           images={allImages}
-          index={lightboxIndex}
+          initialIndex={lightboxIndex}
           locale={locale}
           onClose={() => setLightboxIndex(null)}
-          onNavigate={setLightboxIndex}
         />
       )}
     </Section>

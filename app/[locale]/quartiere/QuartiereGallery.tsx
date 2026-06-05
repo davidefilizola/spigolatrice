@@ -59,10 +59,9 @@ export default function QuartiereGallery({ locale }: Props) {
       {lightboxIndex !== null && (
         <Lightbox
           images={lightboxImages}
-          index={lightboxIndex}
+          initialIndex={lightboxIndex}
           locale={locale}
           onClose={() => setLightboxIndex(null)}
-          onNavigate={setLightboxIndex}
         />
       )}
     </>

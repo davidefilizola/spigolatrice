@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { t, type Locale } from '@/core/lib/i18n'
+import { useModalA11y } from '@/core/lib/useModalA11y'
 
 export interface LightboxImage {
   src: string
@@ -13,90 +14,104 @@ export interface LightboxImage {
 
 interface LightboxProps {
   images: LightboxImage[]
-  index: number
+  /** Indice della foto da cui aprire. Da qui in poi l'indice è gestito internamente. */
+  initialIndex: number
   locale: Locale
   onClose: () => void
-  onNavigate: (newIndex: number) => void
 }
 
+/**
+ * Lightbox riusabile per scorrere le foto a schermo intero.
+ * - Mobile: swipe orizzontale fluido (track nativo scroll-snap, indice locale).
+ * - Desktop: una foto alla volta con frecce + tastiera (←/→/Esc).
+ * Best practice modal incluse: focus trap, blocco scroll del body, ripristino del
+ * focus alla chiusura, e tasto "indietro" del browser/telefono che chiude l'overlay.
+ */
 export default function Lightbox({
   images,
-  index,
+  initialIndex,
   locale,
   onClose,
-  onNavigate,
 }: LightboxProps) {
-  const current = images[index]
-  const touchStartX = useRef<number | null>(null)
-  const [direction, setDirection] = useState<'next' | 'prev' | null>(null)
+  const [active, setActive] = useState(initialIndex)
+  const trackRef = useRef<HTMLDivElement>(null)
+  // Comportamenti standard del modal (scroll lock, focus trap, focus restore,
+  // Esc e tasto "indietro" del telefono per chiudere) — vedi useModalA11y.
+  const dialogRef = useModalA11y<HTMLDivElement>(true, onClose, { backButton: true })
 
-  const next = () => {
-    setDirection('next')
-    onNavigate((index + 1) % images.length)
-  }
-  const prev = () => {
-    setDirection('prev')
-    onNavigate((index - 1 + images.length) % images.length)
-  }
+  const total = images.length
+  const labels =
+    locale === 'it'
+      ? { close: 'Chiudi', prev: 'Precedente', next: 'Successiva', dialog: 'Galleria immagini' }
+      : { close: 'Close', prev: 'Previous', next: 'Next', dialog: 'Image gallery' }
 
-  // Keyboard nav + ESC
+  // Chiusura: passa dal tasto "indietro" così consumiamo lo stato di history
+  // aggiunto dall'hook all'apertura.
+  const requestClose = () => window.history.back()
+
+  // Navigazione da tastiera (desktop): frecce ← / → (Esc è gestito dall'hook)
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
-      if (e.key === 'ArrowRight') next()
-      if (e.key === 'ArrowLeft') prev()
+      if (e.key === 'ArrowRight') setActive((a) => (a + 1) % total)
+      else if (e.key === 'ArrowLeft') setActive((a) => (a - 1 + total) % total)
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index])
+  }, [total])
 
-  // Preload immagini adiacenti per evitare flash
+  // Posiziona il track mobile: apertura + cambi da frecce/tastiera. Niente loop:
+  // dopo lo scroll l'indice derivato coincide con `active`.
   useEffect(() => {
-    const nextImg = new window.Image()
-    nextImg.src = images[(index + 1) % images.length].src
-    const prevImg = new window.Image()
-    prevImg.src = images[(index - 1 + images.length) % images.length].src
-  }, [index, images])
+    const el = trackRef.current
+    if (!el || el.clientWidth === 0) return
+    const derived = Math.round(el.scrollLeft / el.clientWidth)
+    if (derived !== active) el.scrollTo({ left: active * el.clientWidth })
+  }, [active])
 
-  // Swipe touch
-  const onTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX
+  // Aggiorna l'indice durante lo swipe (mobile) — solo stato locale → fluido
+  const onTrackScroll = () => {
+    const el = trackRef.current
+    if (!el || el.clientWidth === 0) return
+    const i = Math.round(el.scrollLeft / el.clientWidth)
+    if (i !== active) setActive(i)
   }
-  const onTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return
-    const deltaX = e.changedTouches[0].clientX - touchStartX.current
-    if (Math.abs(deltaX) > 50) {
-      deltaX > 0 ? prev() : next()
+
+  // Precarica le immagini adiacenti per evitare flash durante lo swipe
+  useEffect(() => {
+    const preload = (i: number) => {
+      const img = new window.Image()
+      img.src = images[(i + total) % total].src
     }
-    touchStartX.current = null
-  }
+    preload(active + 1)
+    preload(active - 1)
+  }, [active, images, total])
 
+  const current = images[active]
   if (!current) return null
 
   return (
     <div
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
+      aria-label={labels.dialog}
       className="fixed inset-0 z-[200] flex flex-col bg-black/95 backdrop-blur-sm"
-      onClick={onClose}
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
+      onClick={requestClose}
     >
-      {/* Top bar */}
-      <div className="flex items-center justify-between p-4 sm:p-6 text-white/80">
+      {/* Top bar — contatore + chiudi */}
+      <div className="relative z-10 flex items-center justify-between p-4 sm:p-6 text-white/80">
         <span className="text-sm tabular-nums">
-          <span className="font-serif italic text-base">{String(index + 1).padStart(2, '0')}</span>
+          <span className="font-serif italic text-base">{String(active + 1).padStart(2, '0')}</span>
           <span className="mx-1.5 opacity-50">/</span>
-          <span className="opacity-70">{String(images.length).padStart(2, '0')}</span>
+          <span className="opacity-70">{String(total).padStart(2, '0')}</span>
         </span>
         <button
           onClick={(e) => {
             e.stopPropagation()
-            onClose()
+            requestClose()
           }}
-          className="p-2 -mr-2 hover:text-white"
-          aria-label="Chiudi"
+          className="flex h-11 w-11 items-center justify-center -mr-2 hover:text-white"
+          aria-label={labels.close}
         >
           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -104,28 +119,38 @@ export default function Lightbox({
         </button>
       </div>
 
-      {/* Image area */}
-      <div className="relative flex-1 flex items-center justify-center px-4 pb-4 sm:px-12">
-        {/* Prev arrow (desktop) */}
+      {/* MOBILE — track con swipe fluido (scroll-snap nativo, indice locale) */}
+      <div
+        ref={trackRef}
+        onScroll={onTrackScroll}
+        onClick={(e) => e.stopPropagation()}
+        className="sm:hidden flex-1 flex overflow-x-auto overscroll-x-contain snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {images.map((img) => (
+          <div key={img.src} className="relative shrink-0 w-full h-full snap-center">
+            <Image src={img.src} alt={img.alt} fill className="object-contain" sizes="100vw" />
+          </div>
+        ))}
+      </div>
+
+      {/* DESKTOP — una foto alla volta con frecce */}
+      <div className="hidden sm:flex relative flex-1 items-center justify-center px-12">
         <button
           onClick={(e) => {
             e.stopPropagation()
-            prev()
+            setActive((a) => (a - 1 + total) % total)
           }}
-          className="hidden sm:flex absolute left-3 top-1/2 -translate-y-1/2 items-center justify-center w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-          aria-label="Precedente"
+          className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+          aria-label={labels.prev}
         >
           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
 
-        {/* Image */}
         <div
           key={current.src}
-          className={`relative max-h-full max-w-full ${
-            direction === 'next' ? 'animate-[fade-in_0.25s_ease-out]' : ''
-          } ${direction === 'prev' ? 'animate-[fade-in_0.25s_ease-out]' : ''}`}
+          className="relative max-h-full max-w-full animate-[fade-in_0.25s_ease-out] motion-reduce:animate-none"
           onClick={(e) => e.stopPropagation()}
         >
           <Image
@@ -133,19 +158,18 @@ export default function Lightbox({
             alt={current.alt}
             width={current.width}
             height={current.height}
-            className="max-h-[75vh] sm:max-h-[80vh] w-auto h-auto object-contain rounded-lg"
+            className="max-h-[80vh] w-auto h-auto object-contain rounded-lg"
             priority
           />
         </div>
 
-        {/* Next arrow (desktop) */}
         <button
           onClick={(e) => {
             e.stopPropagation()
-            next()
+            setActive((a) => (a + 1) % total)
           }}
-          className="hidden sm:flex absolute right-3 top-1/2 -translate-y-1/2 items-center justify-center w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-          aria-label="Successiva"
+          className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+          aria-label={labels.next}
         >
           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -153,40 +177,11 @@ export default function Lightbox({
         </button>
       </div>
 
-      {/* Bottom bar — caption + mobile arrows */}
-      <div className="p-4 sm:p-6 text-center text-white/80">
+      {/* Bottom bar — didascalia (se presente) */}
+      <div className="relative z-10 px-4 sm:px-6 pb-5 pt-2 text-center text-white/80 min-h-[3rem]">
         {current.caption && (
-          <p className="font-serif italic text-base sm:text-lg mb-3">
-            {t(current.caption, locale)}
-          </p>
+          <p className="font-serif italic text-base sm:text-lg">{t(current.caption, locale)}</p>
         )}
-        {/* Mobile-only arrows */}
-        <div className="flex sm:hidden justify-center gap-4 mt-2">
-          <button
-            onClick={(e) => {
-              e.stopPropagation()
-              prev()
-            }}
-            className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 active:bg-white/30 text-white"
-            aria-label="Precedente"
-          >
-            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button
-            onClick={(e) => {
-              e.stopPropagation()
-              next()
-            }}
-            className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 active:bg-white/30 text-white"
-            aria-label="Successiva"
-          >
-            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
       </div>
     </div>
   )

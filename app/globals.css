@@ -57,6 +57,9 @@ html.dark {
   .kenburns {
     animation: none;
   }
+  * {
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Mappa Leaflet — popup styling minimale */

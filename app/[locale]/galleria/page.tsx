@@ -137,10 +137,9 @@ export default function GalleriaPage() {
       {lightboxIndex !== null && (
         <Lightbox
           images={allImages}
-          index={lightboxIndex}
+          initialIndex={lightboxIndex}
           locale={locale}
           onClose={() => setLightboxIndex(null)}
-          onNavigate={setLightboxIndex}
         />
       )}
     </div>
