@@ -1,23 +1,6 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist, Fraunces } from 'next/font/google'
-import { ThemeProvider } from 'next-themes'
-import { Analytics } from '@vercel/analytics/next'
-import PWARegister from '@/core/components/PWARegister'
-import MotionProvider from '@/core/components/MotionProvider'
 import { site } from '@/content/site'
 import './globals.css'
-
-const geist = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-  display: 'swap',
-})
-
-const fraunces = Fraunces({
-  variable: '--font-fraunces',
-  subsets: ['latin'],
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -42,24 +25,10 @@ export const viewport: Viewport = {
   ],
 }
 
+// Root layout "passthrough": <html>/<body>, font e provider sono nel layout
+// [locale], così <html lang> riflette il locale (it/en) lato server. Con il
+// middleware ogni richiesta senza locale viene rediretta a /{locale}, quindi
+// anche i 404 passano dal layout [locale] e hanno il loro <html>.
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html
-      lang="it"
-      className={`${geist.variable} ${fraunces.variable}`}
-      suppressHydrationWarning
-    >
-      <body className="font-sans antialiased">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <MotionProvider>
-            {children}
-            <PWARegister />
-          </MotionProvider>
-        </ThemeProvider>
-        {/* Vercel Analytics: attivo solo in production su Vercel.
-            In locale è no-op. Niente cookie banner richiesto (GDPR-safe). */}
-        <Analytics />
-      </body>
-    </html>
-  )
+  return children
 }

@@ -8,8 +8,8 @@ const ogLocale: Record<Locale, string> = {
 }
 
 const baseDescriptionByLocale: Record<Locale, string> = {
-  it: 'Spigolatrice di Lambrate: tre appartamenti in affitto breve a Milano, quartiere universitario di Lambrate. Amati dagli ospiti (4,92–4,99★ su Airbnb), check-in flessibile, a 2 minuti dalla metro M2 e a 10 minuti dal Duomo. Accettiamo anche Bitcoin e criptovalute.',
-  en: 'Spigolatrice di Lambrate: three short-stay apartments in Milan, in the Lambrate university district. Guest favourites (4.92–4.99★ on Airbnb), flexible check-in, 2 minutes from the M2 metro and 10 minutes from the Duomo. We also accept Bitcoin and cryptocurrency.',
+  it: 'Tre appartamenti in affitto breve a Milano, nel quartiere universitario di Lambrate. 4,9★ su Airbnb, a 2 minuti dalla metro M2. Accettiamo anche Bitcoin.',
+  en: 'Three short-stay apartments in Milan, in the Lambrate university district. 4.9★ on Airbnb, 2 minutes from the M2 metro. We also accept Bitcoin.',
 }
 
 // Keywords aggregate: brand + locali + zona + nicchia "cripto"
@@ -72,13 +72,17 @@ const allKeywords: Record<Locale, string[]> = {
  */
 export function buildMetadata(locale: Locale): Metadata {
   const description = baseDescriptionByLocale[locale]
-  const title = locale === 'it'
-    ? `${site.name} — Affitti brevi a Milano · Lambrate`
-    : `${site.name} — Short-stay rentals in Milan · Lambrate`
+  // Titolo "nudo" per il tag <title> (il template del layout aggiunge "| brand"
+  // una sola volta, niente brand doppio) e titolo "completo" col brand per i
+  // social (OpenGraph/Twitter), dove og:site_name da solo non basta.
+  const titleBare = locale === 'it'
+    ? 'Affitti brevi a Milano · Lambrate'
+    : 'Short-stay rentals in Milan · Lambrate'
+  const titleFull = `${site.name} — ${titleBare}`
 
   return {
     metadataBase: new URL(site.url),
-    title: { default: title, template: `%s | ${site.name}` },
+    title: { default: titleBare, template: `%s | ${site.name}` },
     description,
     keywords: allKeywords[locale],
     applicationName: site.name,
@@ -87,7 +91,7 @@ export function buildMetadata(locale: Locale): Metadata {
     publisher: 'Spigolatrice di Lambrate',
     formatDetection: { telephone: true, address: true, email: true },
     openGraph: {
-      title,
+      title: titleFull,
       description,
       url: `${site.url}/${locale}`,
       siteName: site.name,
@@ -98,7 +102,7 @@ export function buildMetadata(locale: Locale): Metadata {
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: titleFull,
       description,
       images: [site.seo.ogImage],
     },

@@ -18,7 +18,7 @@ const COPY = {
     eyebrow: 'Bitcoin · Ethereum · Stablecoin',
     title: 'Affitti brevi a Milano pagabili in Bitcoin e criptovalute',
     intro: 'Spigolatrice di Lambrate è una delle poche realtà di affitti brevi a Milano che accetta pagamenti diretti in criptovaluta. Tre appartamenti nel quartiere universitario di Lambrate, a due passi dalla metro M2, prenotabili in BTC, ETH, USDC, USDT e altre coin su accordo diretto.',
-    metaTitle: 'Affitto Milano Bitcoin · pagamento in cripto · Spigolatrice di Lambrate',
+    metaTitle: 'Affitto Milano Bitcoin · pagamento in cripto',
     metaDescription: 'Affitti brevi a Milano pagabili in Bitcoin, Ethereum e stablecoin (USDC, USDT). Tre appartamenti nel quartiere di Lambrate. Crypto-friendly host: prenota in cripto, senza chargeback, con conferma rapida.',
     acceptedTitle: 'Cosa accettiamo',
     accepted: [
@@ -75,7 +75,7 @@ const COPY = {
     eyebrow: 'Bitcoin · Ethereum · Stablecoins',
     title: 'Short-stay rentals in Milan paid in Bitcoin & cryptocurrency',
     intro: 'Spigolatrice di Lambrate is one of the few short-stay rentals in Milan that accepts direct cryptocurrency payments. Three apartments in the Lambrate university district, steps from the M2 metro, bookable in BTC, ETH, USDC, USDT and other coins by direct arrangement.',
-    metaTitle: 'Rent Milan with Bitcoin · crypto payment · Spigolatrice di Lambrate',
+    metaTitle: 'Rent Milan with Bitcoin · crypto payment',
     metaDescription: 'Short-stay rentals in Milan payable in Bitcoin, Ethereum and stablecoins (USDC, USDT). Three apartments in Lambrate. Crypto-friendly host: book with crypto, no chargebacks, fast confirmation.',
     acceptedTitle: 'What we accept',
     accepted: [

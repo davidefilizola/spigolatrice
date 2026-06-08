@@ -17,7 +17,7 @@ export async function generateMetadata({
   const { locale } = await params
   if (!isValidLocale(locale)) return {}
   const validLocale = locale as Locale
-  const title = `${t(site.faq.title, validLocale)} · ${site.name}`
+  const title = t(site.faq.title, validLocale)
   return {
     title,
     description: validLocale === 'it'

@@ -20,7 +20,7 @@ export async function generateMetadata({
   const { locale } = await params
   if (!isValidLocale(locale)) return {}
   const validLocale = locale as Locale
-  const title = `${t(site.neighborhood.title, validLocale)} · ${site.name}`
+  const title = t(site.neighborhood.title, validLocale)
   const description = t(site.neighborhood.intro, validLocale)
   return {
     title,

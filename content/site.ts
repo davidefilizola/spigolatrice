@@ -631,13 +631,14 @@ export const site = {
 // Il layout alterna in modo da generare un pattern Airbnb-style nella griglia masonry.
 function buildGallery(slug: 'donegani' | 'grossich' | 'buschi', count: number) {
   const out: Array<{ src: string; alt: string; width: number; height: number; layout: 'full' | 'half' | 'tall'; caption: { it: string; en: string } }> = []
+  const casa = `Casa ${slug.charAt(0).toUpperCase()}${slug.slice(1)}`
   for (let i = 1; i <= count; i++) {
     const n = String(i).padStart(2, '0')
     // Pattern: ogni 7 foto una full, ogni 5 una tall, le altre half
     const layout: 'full' | 'half' | 'tall' = i % 7 === 1 ? 'full' : i % 5 === 0 ? 'tall' : 'half'
     out.push({
       src: `/images/case/${slug}/${n}.jpg`,
-      alt: `${slug} ${n}`,
+      alt: `${casa} — Milano Lambrate (foto ${i})`,
       width: layout === 'tall' ? 800 : layout === 'full' ? 1600 : 1200,
       height: layout === 'tall' ? 1200 : layout === 'full' ? 900 : 1200,
       layout,

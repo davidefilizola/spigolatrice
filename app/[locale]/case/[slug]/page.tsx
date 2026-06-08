@@ -81,6 +81,21 @@ export default async function CasePage({
     sameAs: [property.airbnbUrl],
   }
 
+  // BreadcrumbList: Home › Casa X — abilita le briciole nei risultati Google
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: site.name, item: `${site.url}/${validLocale}` },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: t(property.name, validLocale),
+        item: `${site.url}/${validLocale}/case/${property.slug}`,
+      },
+    ],
+  }
+
   const otherProperties = site.properties.filter((p) => p.slug !== property.slug)
 
   return (
@@ -88,6 +103,10 @@ export default async function CasePage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
 
       {/* ─── HERO ─────────────────────────────────────────────── */}
