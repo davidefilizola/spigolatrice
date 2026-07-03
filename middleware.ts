@@ -46,7 +46,10 @@ export function middleware(request: NextRequest) {
     const acceptLanguage = request.headers.get('accept-language') ?? ''
     const preferred = acceptLanguage.split(',')[0].split('-')[0].toLowerCase()
     const locale = locales.includes(preferred) ? preferred : defaultLocale
-    return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url), 308)
+    // Per la root ('/') redirigi direttamente a /{locale} (niente slash finale),
+    // evitando il doppio salto / → /it/ → /it.
+    const rest = pathname === '/' ? '' : pathname
+    return NextResponse.redirect(new URL(`/${locale}${rest}`, request.url), 308)
   }
 }
 

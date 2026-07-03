@@ -43,8 +43,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // FAQ
   addPage((l) => `/${l}/faq`, 0.5, 'monthly')
 
-  // Cripto / Crypto
-  addPage((l) => (l === 'it' ? '/it/cripto' : '/en/crypto'), 0.7, 'monthly')
+  // Cripto (coerente con canonical/hreflang della pagina; l'alias
+  // /{locale}/crypto → /{locale}/cripto è gestito dal middleware)
+  addPage((l) => `/${l}/cripto`, 0.7, 'monthly')
 
   return entries
 }
